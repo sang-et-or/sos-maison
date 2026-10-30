@@ -1,0 +1,46 @@
+name: Tests et compilation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sos_maison
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/sos_maison
+      APP_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package.json
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+      - name: Vérifier les types
+        run: npm run typecheck
+      - name: Tests unitaires (sécurité, liens, crédits)
+        run: npm test
+      - name: Créer la base
+        run: npm run db:migrate
+      - name: Tests de la base de données
+        run: npm run test:db
+      - name: Compiler le site
+        run: npm run build
+      - name: Démarrer et vérifier les pages
+        run: |
+          npm run db:seed
+          npx next start -p 3000 &
+          for i in $(seq 1 30); do curl -sf http://localhost:3000/ > /dev/null && break; sleep 1; done
+          npx tsx tests/smoke.ts
