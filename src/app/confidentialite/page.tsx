@@ -4,7 +4,7 @@ export const metadata = { title: "Confidentialité — SOS Maison" };
 export default function Page() {
   return (
     <article className="card prose-chat mt-6 space-y-3">
-      <h1 className="text-2xl font-extrabold text-brand-900">Politique de confidentialité</h1>
+      <h1 className="text-2xl font-extrabold text-ink">Politique de confidentialité</h1>
       <p>Responsable du traitement : [nom, adresse, e-mail de contact].</p>
       <h2 className="font-bold">Données collectées</h2>
       <ul>

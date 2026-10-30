@@ -27,14 +27,14 @@ export function AccountActions() {
 
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-bold text-brand-900">Mes données</h2>
+      <h2 className="text-lg font-bold text-ink">Mes données</h2>
       <a href="/api/account/export" className="btn-soft w-full">Télécharger mes données</a>
       <button onClick={logout} className="btn-soft w-full">Me déconnecter</button>
       {!open ? (
         <button onClick={() => setOpen(true)} className="btn w-full text-danger-700 underline">Supprimer mon compte</button>
       ) : (
-        <div className="card space-y-3 ring-red-200">
-          <p className="text-slate-700">
+        <div className="card space-y-3 ring-danger-600/20">
+          <p className="text-ink">
             Tous vos dépannages, photos et équipements seront supprimés définitivement. Tapez <strong>SUPPRIMER</strong> pour confirmer.
           </p>
           <input value={confirm} onChange={(e) => setConfirm(e.target.value)} className="input" aria-label="Confirmation" autoCapitalize="characters" />

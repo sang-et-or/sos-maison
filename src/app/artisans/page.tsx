@@ -1,73 +1,97 @@
+import Link from "next/link";
 import { sql } from "@/lib/db";
+import { currentUser } from "@/lib/auth";
+import { ProCard, type ProView } from "./ProCard";
 
 export const dynamic = "force-dynamic";
 
-interface Pro {
-  id: string;
-  company_name: string;
-  city: string;
-  postal_code: string;
-  description: string | null;
-  phone: string | null;
-  email: string | null;
-  website: string | null;
-}
+const COLORS = ["#ffc83d", "#ddf6f1", "#ffe9df", "#e4edff", "#eee9ff"];
 
-/** Annuaire : recherche par code postal et métier. Formulaire de demande et espace artisan : jalon 2. */
-export default async function ProsPage({ searchParams }: { searchParams: Promise<{ cp?: string; metier?: string }> }) {
-  const { cp = "", metier = "" } = await searchParams;
+export default async function ProsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ cp?: string; metier?: string; depannage?: string }>;
+}) {
+  const { cp: cpParam, metier = "", depannage } = await searchParams;
+  const user = await currentUser().catch(() => null);
+  const cp = cpParam ?? user?.postal_code ?? "";
   const categories = await sql<{ slug: string; name: string }[]>`
     select slug, name from pro_categories where active order by sort_order`;
   const validCp = /^[0-9]{5}$/.test(cp);
   const validCat = categories.some((c) => c.slug === metier) ? metier : null;
-  const pros = validCp ? await sql<Pro[]>`select * from find_pros(${cp}, ${validCat}) limit 30` : [];
+
+  const pros = validCp
+    ? await sql<(ProView & { cats: string[] })[]>`
+        select p.id, p.company_name, p.city, p.postal_code, p.description, p.phone, p.email, p.website, p.siret,
+               coalesce(array_agg(c.name order by c.sort_order) filter (where c.name is not null), '{}') as cats
+        from find_pros(${cp}, ${validCat}) p
+        left join pro_category_links l on l.pro_id = p.id
+        left join pro_categories c on c.slug = l.category_slug
+        group by p.id, p.company_name, p.city, p.postal_code, p.description, p.phone, p.email, p.website, p.siret
+        limit 30`
+    : [];
+
+  // Le dépannage d'origine n'est proposé au partage que s'il appartient bien à l'utilisateur.
+  let repair: { id: string; title: string } | null = null;
+  if (user && depannage && /^[0-9a-f-]{36}$/i.test(depannage)) {
+    const [r] = await sql<{ id: string; title: string }[]>`
+      select id, title from repairs where id = ${depannage} and user_id = ${user.id}`;
+    repair = r ?? null;
+  }
+
+  const qs = (extra: Record<string, string>) => {
+    const p = new URLSearchParams({ ...(validCp ? { cp } : {}), ...(depannage ? { depannage } : {}), ...extra });
+    return `/artisans?${p}`;
+  };
 
   return (
-    <div className="space-y-6 pt-6">
+    <div className="space-y-5 pt-3">
       <div>
-        <h1 className="text-2xl font-extrabold text-brand-900">Trouver un professionnel</h1>
-        <p className="text-slate-600">Plombiers, électriciens, chauffagistes et autres artisans près de chez vous.</p>
+        <h1 className="font-display text-[1.8rem] font-extrabold leading-tight tracking-tight">Un pro près de chez vous</h1>
+        <p className="text-muted">Artisans vérifiés, contact direct, sans commission.</p>
       </div>
 
-      <form className="card space-y-3" method="get">
-        <div className="space-y-2">
-          <label htmlFor="cp" className="block font-semibold text-brand-900">Code postal</label>
+      <form method="get" className="grid gap-2.5 rounded-[1.6rem] bg-white p-3">
+        {depannage && <input type="hidden" name="depannage" value={depannage} />}
+        {validCat && <input type="hidden" name="metier" value={validCat} />}
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
+          <label htmlFor="cp" className="sr-only">Code postal</label>
           <input id="cp" name="cp" defaultValue={cp} inputMode="numeric" pattern="[0-9]{5}" maxLength={5} required
-                 className="input" placeholder="69003" />
+                 placeholder="Votre code postal" className="input" />
+          <button className="btn-ink">Chercher</button>
         </div>
-        <div className="space-y-2">
-          <label htmlFor="metier" className="block font-semibold text-brand-900">Métier</label>
-          <select id="metier" name="metier" defaultValue={validCat ?? ""} className="input">
-            <option value="">Tous les métiers</option>
-            {categories.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
-          </select>
-        </div>
-        <button className="btn-primary w-full">Rechercher</button>
+        <nav className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]" aria-label="Métiers">
+          <Link href={qs({})} aria-current={!validCat ? "true" : undefined}
+                className={`shrink-0 rounded-full border-2 px-3.5 py-1.5 text-[0.9rem] font-bold ${!validCat ? "border-ink bg-ink text-white" : "border-line bg-white"}`}>Tous</Link>
+          {categories.map((c) => (
+            <Link key={c.slug} href={qs({ metier: c.slug })} aria-current={validCat === c.slug ? "true" : undefined}
+                  className={`shrink-0 rounded-full border-2 px-3.5 py-1.5 text-[0.9rem] font-bold ${validCat === c.slug ? "border-ink bg-ink text-white" : "border-line bg-white"}`}>
+              {c.name}
+            </Link>
+          ))}
+        </nav>
       </form>
 
-      {validCp && (
-        pros.length === 0 ? (
-          <div className="card space-y-1">
-            <p className="font-semibold text-brand-900">Aucun professionnel inscrit dans cette zone pour le moment.</p>
-            <p className="text-slate-600">L&apos;annuaire s&apos;agrandit chaque semaine. Vous êtes artisan&nbsp;? L&apos;inscription sera bientôt ouverte et gratuite.</p>
+      {validCp &&
+        (pros.length === 0 ? (
+          <div className="grid gap-1 rounded-[1.6rem] bg-white p-5">
+            <b className="font-display text-[1.1rem]">Pas encore d&apos;artisan inscrit ici</b>
+            <p className="text-muted">L&apos;annuaire s&apos;agrandit chaque semaine. En attendant, Toit-Toit peut vous aider à préparer votre demande.</p>
           </div>
         ) : (
           <ul className="space-y-3">
-            {pros.map((p) => (
-              <li key={p.id} className="card space-y-2">
-                <p className="text-lg font-bold text-brand-900">{p.company_name}</p>
-                <p className="text-slate-500">{p.city} ({p.postal_code})</p>
-                {p.description && <p className="text-slate-700">{p.description}</p>}
-                <div className="grid gap-2 pt-1">
-                  {p.phone && <a href={`tel:${p.phone.replace(/\s/g, "")}`} className="btn-primary w-full">Appeler · {p.phone}</a>}
-                  {p.email && <a href={`mailto:${p.email}`} className="btn-soft w-full">Envoyer un e-mail</a>}
-                  {p.website && <a href={p.website} target="_blank" rel="noopener noreferrer nofollow" className="btn-soft w-full">Site internet</a>}
-                </div>
+            {pros.map((p, i) => (
+              <li key={p.id}>
+                <ProCard pro={p} color={COLORS[i % COLORS.length]} specialties={p.cats} loggedIn={Boolean(user)}
+                         defaultEmail={user?.email ?? ""} postalCode={cp} repair={repair} />
               </li>
             ))}
           </ul>
-        )
-      )}
+        ))}
+
+      <p className="text-center text-muted">
+        Vous êtes artisan&nbsp;? <b className="text-ink">L&apos;inscription est gratuite.</b>
+      </p>
     </div>
   );
 }

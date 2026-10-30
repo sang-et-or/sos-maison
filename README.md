@@ -1,22 +1,35 @@
-# SOS Maison — jalon 1
+# SOS Maison — version 0.2
 
-Assistant de dépannage domestique : conversation avec l'IA, photos, dictée, recherche de tutoriels vérifiés,
-sécurité renforcée, comptes sans mot de passe, annuaire d'artisans (consultation), application installable.
+Assistant de dépannage domestique avec Toit-Toit, la mascotte : conversation avec l'IA, photos, dictée,
+fiches de réparation à cocher, tutoriels vérifiés, sécurité renforcée, comptes sans mot de passe,
+annuaire d'artisans avec demande d'intervention, application installable.
 
 ## Ce qui est livré
 
 | Fonction | État |
 | --- | --- |
-| Base de données complète (19 tables, fonctions de crédits, RGPD, annuaire) | Testée sur PostgreSQL 16 |
+| Base de données (19 tables + fiches de réparation, crédits, RGPD, annuaire) | Testée sur PostgreSQL 16 |
 | Moteur de sécurité (5 niveaux, écran d'urgence, numéros) | Testé (20 situations) |
 | Liens vérifiés (aucune adresse inventée) | Testé |
 | Crédits et usage raisonnable Premium | Testés, y compris 40 débits simultanés |
-| Rendu des réponses (listes, gras, sources) | Testé |
-| Site Next.js : accueil, conversation, photos, dictée, compte, annuaire, pages légales, PWA | Écrit et vérifié en syntaxe ; **pas encore compilé** (npm indisponible ici) : GitHub le compilera et lancera le test de bout en bout au premier envoi |
+| Fiche de réparation générée par l'IA (validation, étapes à cocher, économies estimées) | Testée |
+| Composants de l'interface (accueil, conversation, fiche, artisans, barre d'onglets) | Rendu testé avec React |
+| Site Next.js complet | Écrit et vérifié en syntaxe ; **pas encore compilé** (npm indisponible ici) : GitHub le compilera et lancera le test de bout en bout au premier envoi |
 
-**Pas encore fait** (jalons suivants) : formulaire de demande d'intervention et espace artisan, abonnement Stripe,
-conversation vocale et vidéo en direct, tableau de bord administrateur.
-« Parler » utilise pour l'instant la dictée du téléphone ; « Montrer en vidéo » prend une photo.
+**Nouveau dans cette version**
+
+- Design « Toit-Toit » : bandeau mandarine, mascotte animée, tuiles colorées, exemples de problèmes à toucher,
+  six domaines en icônes, barre d'onglets en bas comme une application, polices très lisibles.
+- Fiche de réparation interactive : l'IA remplit une fiche structurée (diagnostic, outils, durée, coût des pièces,
+  sécurité, étapes). On coche les étapes, la progression est enregistrée ; une fois tout coché, Toit-Toit demande
+  si ça marche, et la réussite est fêtée avec des confettis.
+- Mon espace : jauge de crédits, problèmes résolus, économies estimées (prix d'artisan évité).
+- Annuaire : filtres par métier, badges, et **demande d'intervention** envoyée par e-mail à l'artisan, avec le
+  résumé du dépannage seulement si l'utilisateur coche la case (5 demandes par jour au maximum).
+- Écran d'urgence redessiné : alerte animée, consignes numérotées, numéros en grand.
+
+**Pas encore fait** : espace artisan (création et gestion de fiche), abonnement Stripe, conversation vocale et
+vidéo en direct, tableau de bord administrateur. « Parler » utilise la dictée du téléphone ; « Montrer en vidéo » prend une photo.
 
 ## Mettre le site en ligne gratuitement
 

@@ -27,7 +27,7 @@ async function main() {
   r = await get("/artisans?cp=69006&metier=plombier");
   assert.match(await r.text(), /Démo Plomberie Rhône/);
   r = await get("/artisans?cp=13001&metier=plombier");
-  assert.match(await r.text(), /Aucun professionnel/);
+  assert.match(await r.text(), /Pas encore d(&#x27;|')artisan/);
   console.log("✓ pages publiques");
 
   // Accès protégé
@@ -73,6 +73,40 @@ async function main() {
   assert.equal(repair.risk_level, 4);
   assert.equal(repair.status, "needs_pro");
   console.log("✓ parcours d'urgence");
+
+  // Fiche de réparation : étapes à cocher (fiche insérée directement, sans appel à l'IA)
+  const [rep2] = await sql`insert into repairs (user_id, title)
+                           select id, 'Chasse d''eau' from users where email = ${email} returning id`;
+  const [msg] = await sql`insert into messages (repair_id, role, content, card)
+                          values (${rep2.id}, 'assistant', 'Fiche', ${JSON.stringify({ titre: "Régler le flotteur", diagnostic: "Flotteur trop haut", securite: "Fermez le robinet", outils: ["Tournevis"], etapes: ["a", "b", "c"], economie_estimee_eur: 110 })}::jsonb)
+                          returning id`;
+  r = await get(`/api/messages/${msg.id}/steps`, {
+    method: "PATCH", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ step: 2, done: true }),
+  });
+  assert.deepEqual((await r.json()).done, [2]);
+  r = await get(`/depannage/${rep2.id}`, { headers: { cookie } });
+  assert.match(await r.text(), /Régler le flotteur/);
+  r = await get(`/api/repairs/${rep2.id}`, {
+    method: "PATCH", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ status: "resolved" }),
+  });
+  assert.equal(r.status, 200);
+  const [saved] = await sql`select estimated_saving_eur from repairs where id = ${rep2.id}`;
+  assert.equal(saved.estimated_saving_eur, 110);
+  r = await get("/compte", { headers: { cookie } });
+  assert.match(await r.text(), /≈110 €/);
+  console.log("✓ fiche de réparation et économies");
+
+  // Demande d'intervention avec partage du résumé
+  const [pro] = await sql`select id from pros where company_name = 'Démo Plomberie Rhône'`;
+  r = await get("/api/requests", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", cookie },
+    body: JSON.stringify({ proId: pro.id, repairId: rep2.id, name: "Marie Test", phone: "06 00 00 00 00", postalCode: "69006", message: "Fuite sous l'évier, merci de me rappeler.", consentShare: true }),
+  });
+  assert.equal(r.status, 200, await r.clone().text());
+  const [sr] = await sql`select shared_summary, consent_share from service_requests where pro_id = ${pro.id} order by created_at desc limit 1`;
+  assert.ok(sr.consent_share && /Flotteur trop haut/.test(sr.shared_summary));
+  console.log("✓ demande d'intervention");
 
   // Export et suppression RGPD
   r = await get("/api/account/export", { headers: { cookie } });

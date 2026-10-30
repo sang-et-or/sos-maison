@@ -8,6 +8,7 @@ import { searchTutorials } from "../search/brave";
 import { stripUnverifiedLinks, type SearchResult } from "../search/links";
 import { chargeOrThrow, recordUsage } from "../usage";
 import { HttpError } from "../auth";
+import { CARD_TOOL, normalizeCard, type RepairCard } from "./card";
 
 let client: Anthropic | null = null;
 function anthropic() {
@@ -55,7 +56,8 @@ export type AssistantEvent =
   | { type: "status"; text: string }
   | { type: "sources"; sources: SearchResult[] }
   | { type: "notice"; text: string }
-  | { type: "final"; text: string; sources: SearchResult[] };
+  | { type: "card"; card: RepairCard }
+  | { type: "final"; text: string; sources: SearchResult[]; card: RepairCard | null };
 
 export interface ChatTurn {
   role: "user" | "assistant";
@@ -91,16 +93,22 @@ export async function* runAssistant(opts: {
 }): AsyncGenerator<AssistantEvent> {
   const messages: Anthropic.MessageParam[] = opts.turns.map((t) => ({ role: t.role, content: t.content }));
   const sources: SearchResult[] = [];
-  const tools = tutorialAllowed(opts.risk) || opts.risk === 2 ? [SEARCH_TOOL] : [];
+  const canSearch = tutorialAllowed(opts.risk) || opts.risk === 2;
+  // Fiche pas à pas : seulement quand un tutoriel est autorisé (niveau 0 ou 1).
+  const canCard = tutorialAllowed(opts.risk);
   let searches = 0;
+  let card: RepairCard | null = null;
   let text = "";
 
-  for (let round = 0; round < MAX_SEARCHES + 1; round++) {
+  for (let round = 0; round < MAX_SEARCHES + 2; round++) {
+    const tools: Anthropic.Tool[] = [];
+    if (canSearch && searches < MAX_SEARCHES) tools.push(SEARCH_TOOL);
+    if (canCard && !card) tools.push(CARD_TOOL as Anthropic.Tool);
     const stream = anthropic().messages.stream({
       model: MODELS.chat,
-      max_tokens: 1200,
+      max_tokens: 1600,
       system: systemFor(opts.risk, { premium: opts.premium, equipment: opts.equipment }),
-      tools: tools.length && searches < MAX_SEARCHES ? tools : undefined,
+      tools: tools.length ? tools : undefined,
       messages,
     });
 
@@ -124,10 +132,25 @@ export async function* runAssistant(opts: {
     messages.push({ role: "assistant", content: msg.content });
     const results: Anthropic.ToolResultBlockParam[] = [];
     for (const tu of toolUses) {
+      if (tu.name === CARD_TOOL.name) {
+        const c = canCard ? normalizeCard(tu.input, sources.map((s) => s.url)) : null;
+        if (c) {
+          card = c;
+          yield { type: "card", card: c };
+        }
+        results.push({
+          type: "tool_result",
+          tool_use_id: tu.id,
+          content: c
+            ? "Fiche affichée avec les étapes à cocher. Ajoute seulement une phrase d'encouragement courte, sans répéter les étapes."
+            : "Fiche refusée (incomplète ou non autorisée). Explique simplement par écrit.",
+        });
+        continue;
+      }
       const query = String((tu.input as { requete?: string }).requete ?? "").trim();
       let content: string;
       try {
-        if (!query) throw new Error("requête vide");
+        if (!query || !canSearch) throw new Error("recherche impossible");
         await chargeOrThrow({ userId: opts.userId, kind: "search", repairId: opts.repairId });
         searches++;
         yield { type: "status", text: "Je cherche des tutoriels fiables…" };
@@ -162,5 +185,5 @@ export async function* runAssistant(opts: {
 
   // Les numéros [n] désignent les résultats ; toute adresse web écrite par le modèle est retirée.
   const clean = stripUnverifiedLinks(text, sources.map((s) => s.url)).text.trim();
-  yield { type: "final", text: clean, sources };
+  yield { type: "final", text: clean, sources, card };
 }

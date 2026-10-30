@@ -123,6 +123,11 @@ export async function POST(req: Request) {
               where message_id = ${userMsg.id} and repair_id = ${repair.id} order by created_at`
           : [];
         const turns: ChatTurn[] = [];
+        // Les fiches affichées sont résumées pour que l'assistant sache où en est l'utilisateur.
+        const textOf = (m: (typeof history)[number]) =>
+          m.card
+            ? `${m.content}\n\n[Fiche affichée « ${m.card.titre} » : ${m.card.etapes.map((e, i) => `${i + 1}. ${e}`).join(" ")} — étapes cochées par l'utilisateur : ${m.card_done.length}/${m.card.etapes.length}]`.trim()
+            : m.content;
         for (const m of history) {
           if (m.role === "system") continue;
           const isCurrent = m.id === userMsg.id;
@@ -135,15 +140,15 @@ export async function POST(req: Request) {
                 data: Buffer.from(p.bytes).toString("base64"),
               },
             }));
-            content.push({ type: "text", text: m.content });
+            content.push({ type: "text", text: textOf(m) });
             turns.push({ role: "user", content });
           } else {
             const prev = turns.at(-1);
             // L'API exige l'alternance des rôles : on fusionne deux messages consécutifs du même rôle.
             if (prev && prev.role === m.role && typeof prev.content === "string") {
-              prev.content += "\n\n" + m.content;
+              prev.content += "\n\n" + textOf(m);
             } else {
-              turns.push({ role: m.role, content: m.content });
+              turns.push({ role: m.role, content: textOf(m) });
             }
           }
         }
@@ -164,9 +169,11 @@ export async function POST(req: Request) {
         })) {
           send(ev);
           if (ev.type === "final") {
+            const cardJson = ev.card ? JSON.stringify(ev.card) : null;
             const [a] = await sql<{ id: number }[]>`
-              insert into messages (repair_id, role, content, risk_level)
-              values (${repair.id}, 'assistant', ${ev.text}, ${risk.level}) returning id`;
+              insert into messages (repair_id, role, content, risk_level, card)
+              values (${repair.id}, 'assistant', ${ev.text}, ${risk.level}, ${cardJson}::jsonb) returning id`;
+            send({ type: "saved", messageId: a.id });
             for (const s of ev.sources) {
               await sql`insert into sources (repair_id, message_id, url, title, provider, is_video)
                         values (${repair.id}, ${a.id}, ${s.url}, ${s.title.slice(0, 300)}, 'brave', ${s.isVideo})`;

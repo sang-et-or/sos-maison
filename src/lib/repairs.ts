@@ -20,6 +20,8 @@ export interface StoredMessage {
   role: "user" | "assistant" | "system";
   content: string;
   risk_level: number | null;
+  card: import("./ai/card").RepairCard | null;
+  card_done: number[];
   created_at: Date;
 }
 
@@ -38,7 +40,7 @@ export async function createRepair(userId: string, firstText: string): Promise<R
 
 export async function listMessages(repairId: string, limit = 40): Promise<StoredMessage[]> {
   const rows = await sql<StoredMessage[]>`
-    select id, role, content, risk_level, created_at from messages
+    select id, role, content, risk_level, card, card_done, created_at from messages
     where repair_id = ${repairId} order by id desc limit ${limit}`;
   return rows.reverse();
 }

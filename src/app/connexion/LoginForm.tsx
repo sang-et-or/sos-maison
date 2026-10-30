@@ -30,8 +30,8 @@ export function LoginForm({ next }: { next: string }) {
   if (state === "sent") {
     return (
       <div className="card space-y-2">
-        <p className="text-lg font-semibold text-brand-900">Regardez vos e-mails&nbsp;📬</p>
-        <p className="text-slate-600">
+        <p className="text-lg font-semibold text-ink">Regardez vos e-mails&nbsp;📬</p>
+        <p className="text-muted">
           Nous avons envoyé un lien de connexion à <strong>{email}</strong>. Il est valable 15 minutes.
           Pensez à vérifier les courriers indésirables.
         </p>
@@ -43,13 +43,13 @@ export function LoginForm({ next }: { next: string }) {
   return (
     <form onSubmit={submit} className="card space-y-4">
       <div className="space-y-2">
-        <label htmlFor="email" className="block font-semibold text-brand-900">Votre adresse e-mail</label>
+        <label htmlFor="email" className="block font-semibold text-ink">Votre adresse e-mail</label>
         <input id="email" type="email" inputMode="email" autoComplete="email" required value={email}
                onChange={(e) => setEmail(e.target.value)} className="input" placeholder="prenom.nom@exemple.fr" />
       </div>
-      <label className="flex items-start gap-3 text-[0.98rem] text-slate-700">
+      <label className="flex items-start gap-3 text-[0.98rem] text-ink">
         <input type="checkbox" checked={accept} onChange={(e) => setAccept(e.target.checked)}
-               className="mt-1 h-5 w-5 shrink-0 rounded border-slate-300 accent-brand-500" />
+               className="mt-1 h-5 w-5 shrink-0 rounded border-line accent-tangerine" />
         <span>
           J&apos;accepte les <Link href="/cgu" className="underline">conditions d&apos;utilisation</Link> et la{" "}
           <Link href="/confidentialite" className="underline">politique de confidentialité</Link>.

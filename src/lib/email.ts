@@ -29,3 +29,52 @@ export async function sendLoginEmail(to: string, link: string): Promise<void> {
   });
   if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
 }
+
+const esc = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/** Demande d'intervention transmise à un artisan. */
+export async function sendServiceRequestEmail(to: string, r: {
+  contactName: string;
+  contactPhone?: string | null;
+  contactEmail?: string | null;
+  postalCode: string;
+  message: string;
+  summary?: string | null;
+}): Promise<void> {
+  const key = process.env.RESEND_API_KEY;
+  const rows = [
+    ["Nom", r.contactName],
+    ["Téléphone", r.contactPhone ?? "—"],
+    ["E-mail", r.contactEmail ?? "—"],
+    ["Code postal", r.postalCode],
+  ];
+  const html = `
+    <div style="font-family:system-ui,sans-serif;font-size:16px;line-height:1.5;color:#1b1f3b">
+      <h2 style="margin:0 0 12px">Nouvelle demande d'intervention</h2>
+      <table style="border-collapse:collapse">${rows
+        .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#5d6480">${k}</td><td><strong>${esc(v)}</strong></td></tr>`)
+        .join("")}</table>
+      <p style="margin:16px 0 4px;color:#5d6480">Message</p>
+      <p style="white-space:pre-wrap;margin:0">${esc(r.message)}</p>
+      ${r.summary ? `<p style="margin:16px 0 4px;color:#5d6480">Résumé du diagnostic SOS Maison (partagé avec l'accord du client)</p><p style="white-space:pre-wrap;margin:0">${esc(r.summary)}</p>` : ""}
+      <p style="margin-top:20px;color:#5d6480;font-size:14px">Contactez directement le client. SOS Maison ne prend aucune commission.</p>
+    </div>`;
+  if (!key) {
+    if (process.env.NODE_ENV === "production") throw new Error("RESEND_API_KEY manquant en production");
+    console.info(`[dev] Demande d'intervention pour ${to} :`, r);
+    return;
+  }
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: process.env.EMAIL_FROM ?? "SOS Maison <onboarding@resend.dev>",
+      to,
+      reply_to: r.contactEmail ?? undefined,
+      subject: `Demande d'intervention · ${r.postalCode}`,
+      html,
+    }),
+  });
+  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
+}

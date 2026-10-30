@@ -4,7 +4,7 @@ export const metadata = { title: "Mentions légales — SOS Maison" };
 export default function Page() {
   return (
     <article className="card prose-chat mt-6 space-y-3">
-      <h1 className="text-2xl font-extrabold text-brand-900">Mentions légales</h1>
+      <h1 className="text-2xl font-extrabold text-ink">Mentions légales</h1>
       <h2 className="font-bold">Éditeur</h2>
       <p>[Nom ou raison sociale] — [forme juridique, capital] — [adresse] — SIRET [numéro] — RCS [ville] — TVA [numéro ou « TVA non applicable, art. 293 B du CGI »].</p>
       <p>Directeur de la publication : [nom]. Contact : [adresse e-mail].</p>

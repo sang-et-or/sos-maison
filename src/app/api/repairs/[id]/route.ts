@@ -26,6 +26,15 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
         resolved_at = case when ${status ?? null}::text = 'resolved' then now() else resolved_at end
       where id = ${repair.id}`;
     if (keep) await sql`update attachments set expires_at = null where repair_id = ${repair.id}`;
+    if (status === "resolved") {
+      // Économie estimée = prix d'artisan indiqué par la dernière fiche de réparation.
+      await sql`
+        update repairs set estimated_saving_eur = (
+          select least(greatest((m.card ->> 'economie_estimee_eur')::int, 0), 2000)
+          from messages m where m.repair_id = ${repair.id} and m.card ? 'economie_estimee_eur'
+          order by m.id desc limit 1)
+        where id = ${repair.id}`;
+    }
     return Response.json({ ok: true });
   } catch (e) {
     return errorResponse(e);

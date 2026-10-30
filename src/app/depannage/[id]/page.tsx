@@ -15,7 +15,7 @@ export default async function RepairPage({ params }: { params: Promise<{ id: str
   const balance = premium ? null : user.credit_balance;
 
   if (id === "nouveau") {
-    return <Chat repairId={null} initialMessages={[]} initialStatus="open" proCategory={null} riskLevel={0} balance={balance} />;
+    return <Chat repairId={null} title={null} initialMessages={[]} initialStatus="open" proCategory={null} riskLevel={0} balance={balance} />;
   }
 
   let repair;
@@ -31,6 +31,9 @@ export default async function RepairPage({ params }: { params: Promise<{ id: str
     .filter((m) => m.role !== "system")
     .map((m) => ({
       key: `db${m.id}`,
+      id: m.id,
+      card: m.card,
+      cardDone: m.card_done ?? [],
       role: m.role as "user" | "assistant",
       content: m.content,
       photos: photos.filter((p) => p.message_id === m.id).map((p) => `/api/photos/${p.id}`),
@@ -40,6 +43,7 @@ export default async function RepairPage({ params }: { params: Promise<{ id: str
   return (
     <Chat
       repairId={repair.id}
+      title={repair.title}
       initialMessages={initial}
       initialStatus={repair.status}
       proCategory={repair.pro_category}

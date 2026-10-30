@@ -4,7 +4,7 @@ export const metadata = { title: "Conditions d'utilisation — SOS Maison" };
 export default function Page() {
   return (
     <article className="card prose-chat mt-6 space-y-3">
-      <h1 className="text-2xl font-extrabold text-brand-900">Conditions générales d&apos;utilisation</h1>
+      <h1 className="text-2xl font-extrabold text-ink">Conditions générales d&apos;utilisation</h1>
       <h2 className="font-bold">1. Le service</h2>
       <p>SOS Maison est un assistant d&apos;aide au dépannage domestique. Les réponses sont produites en partie par une intelligence artificielle et peuvent comporter des erreurs. Vous restez seul juge de l&apos;opportunité de réaliser une intervention.</p>
       <h2 className="font-bold">2. Sécurité</h2>

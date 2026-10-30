@@ -58,7 +58,7 @@ function inline(text: string, sources: Source[]): React.ReactNode[] {
       out.push(
         s ? (
           <a key={k++} href={s.url} target="_blank" rel="noopener noreferrer nofollow"
-             className="mx-0.5 inline-grid h-6 min-w-6 place-items-center rounded-full bg-brand-100 px-1.5 align-baseline text-sm font-semibold text-brand-700"
+             className="mx-0.5 inline-grid h-[1.4rem] min-w-[1.4rem] place-items-center rounded-lg bg-sky px-1 align-baseline text-[0.78rem] font-bold text-white"
              aria-label={`Source ${m[2]} : ${s.title}`}>
             {m[2]}
           </a>
@@ -68,7 +68,7 @@ function inline(text: string, sources: Source[]): React.ReactNode[] {
       );
     } else if (m[3] && m[4]) {
       // Seuls les liens déjà vérifiés côté serveur arrivent jusqu'ici.
-      out.push(<a key={k++} href={m[4]} target="_blank" rel="noopener noreferrer nofollow" className="font-medium text-brand-600 underline">{m[3]}</a>);
+      out.push(<a key={k++} href={m[4]} target="_blank" rel="noopener noreferrer nofollow" className="font-bold text-sky-700 underline">{m[3]}</a>);
     }
     last = m.index + m[0].length;
   }
@@ -83,11 +83,11 @@ export function SourceList({ sources }: { sources: Source[] }) {
       {sources.map((s, i) => (
         <li key={s.url}>
           <a href={s.url} target="_blank" rel="noopener noreferrer nofollow"
-             className="flex items-start gap-3 rounded-2xl bg-slate-50 px-3 py-2.5 ring-1 ring-slate-200 hover:bg-brand-50">
-            <span className="mt-0.5 grid h-6 min-w-6 place-items-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">{i + 1}</span>
+             className="flex items-center gap-3 rounded-2xl bg-paper px-3 py-2.5 hover:bg-sky-50">
+            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl font-bold text-white ${s.isVideo ? "bg-lilac" : "bg-sky"}`}>{s.isVideo ? "▶" : i + 1}</span>
             <span className="min-w-0">
-              <span className="block truncate font-medium text-brand-900">{s.isVideo ? "▶ " : ""}{s.title}</span>
-              <span className="block truncate text-sm text-slate-500">{new URL(s.url).hostname.replace(/^www\./, "")}</span>
+              <span className="block truncate font-bold">{s.title}</span>
+              <span className="block truncate text-sm text-muted">{new URL(s.url).hostname.replace(/^www\./, "")}</span>
             </span>
           </a>
         </li>

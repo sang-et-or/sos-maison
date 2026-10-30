@@ -11,42 +11,41 @@ html {
 }
 
 body {
-  @apply bg-[#f7f9fc] text-[#14213d] antialiased;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  @apply bg-paper font-sans text-ink antialiased;
 }
 
-/* Cibles tactiles généreuses et focus bien visible (accessibilité). */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 @layer components {
   .btn {
-    @apply inline-flex min-h-[52px] items-center justify-center gap-2 rounded-2xl px-5 text-[1.0625rem] font-semibold transition
-           focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:opacity-50;
+    @apply inline-flex min-h-[52px] items-center justify-center gap-2 rounded-2xl px-5 text-[1.03rem] font-bold transition
+           active:scale-[.98] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-sky
+           disabled:opacity-50 disabled:active:scale-100;
   }
-  .btn-primary {
-    @apply btn bg-brand-500 text-white shadow-sm hover:bg-brand-600 active:bg-brand-700;
-  }
-  .btn-soft {
-    @apply btn bg-white text-brand-900 ring-1 ring-slate-200 hover:bg-brand-50;
-  }
-  .btn-danger {
-    @apply btn bg-danger-600 text-white hover:bg-danger-700;
-  }
-  .card {
-    @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200/70;
-  }
+  .btn-primary { @apply btn bg-tangerine text-white hover:bg-tangerine-dark; }
+  .btn-ink { @apply btn bg-ink text-white hover:bg-[#2a2f55]; }
+  .btn-mint { @apply btn bg-mint text-white; }
+  .btn-soft { @apply btn bg-white text-ink ring-2 ring-line hover:bg-paper; }
+  .btn-danger { @apply btn bg-danger-600 text-white hover:bg-danger-700; }
+  .card { @apply rounded-4xl bg-white p-5 shadow-soft; }
   .input {
-    @apply w-full rounded-2xl border-0 bg-white px-4 py-3.5 text-[1.0625rem] ring-1 ring-slate-300 placeholder:text-slate-400
-           focus:outline-none focus:ring-2 focus:ring-brand-500;
+    @apply w-full rounded-2xl border-2 border-line bg-paper px-4 py-3 text-[1.0625rem] text-ink placeholder:text-muted/70
+           focus:border-sky focus:bg-white focus:outline-none;
   }
-  .prose-chat p {
-    @apply my-2;
-  }
-  .prose-chat ol {
-    @apply my-2 list-decimal space-y-1.5 pl-6;
-  }
-  .prose-chat ul {
-    @apply my-2 list-disc space-y-1 pl-6;
-  }
-  .prose-chat strong {
-    @apply font-semibold;
+  .section-title { @apply font-display text-xl font-extrabold tracking-tight; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[0.8rem] font-bold; }
+
+  .prose-chat p { @apply my-2 first:mt-0 last:mb-0; }
+  .prose-chat ol { @apply my-2 list-decimal space-y-1.5 pl-6; }
+  .prose-chat ul { @apply my-2 list-disc space-y-1 pl-6; }
+  .prose-chat strong { @apply font-bold; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
