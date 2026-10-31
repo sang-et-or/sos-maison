@@ -17,10 +17,14 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <div className="space-y-6 pt-8">
       <div className="space-y-2">
         <Mascot className="h-24 w-24" />
-        <h1 className="font-display text-[1.8rem] font-extrabold tracking-tight">Bienvenue chez SOS Maison</h1>
+        <h1 className="font-display text-[1.8rem] font-extrabold tracking-tight">Se connecter ou créer un compte</h1>
         <p className="text-muted">
-          Pas de mot de passe à retenir : indiquez votre e-mail, nous vous envoyons un lien pour vous connecter.
-          Nouveau&nbsp;? Votre compte est créé avec <strong>100 crédits offerts</strong>.
+          <strong className="text-ink">Déjà inscrit&nbsp;?</strong> Indiquez simplement votre e-mail : nous vous envoyons un lien qui
+          vous connecte, sans mot de passe à retenir.
+        </p>
+        <p className="text-muted">
+          <strong className="text-ink">Nouveau&nbsp;?</strong> C&apos;est la même chose : votre compte est créé avec{" "}
+          <strong>100 crédits offerts</strong>.
         </p>
       </div>
       {erreur && ERRORS[erreur] && (
