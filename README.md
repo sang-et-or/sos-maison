@@ -1,4 +1,4 @@
-# SOS Maison — version 0.2
+# SOS Maison — version 0.3
 
 Assistant de dépannage domestique avec Toit-Toit, la mascotte : conversation avec l'IA, photos, dictée,
 fiches de réparation à cocher, tutoriels vérifiés, sécurité renforcée, comptes sans mot de passe,
@@ -27,6 +27,9 @@ annuaire d'artisans avec demande d'intervention, application installable.
 - Annuaire : filtres par métier, badges, et **demande d'intervention** envoyée par e-mail à l'artisan, avec le
   résumé du dépannage seulement si l'utilisateur coche la case (5 demandes par jour au maximum).
 - Écran d'urgence redessiné : alerte animée, consignes numérotées, numéros en grand.
+- **Recherche Google des artisans dans le site** (version 0.3) : sous l'annuaire, un bouton cherche le métier autour
+  du code postal via Google Places ; nom, adresse, note et avis, ouvert ou fermé, appel et site web s'affichent dans
+  SOS Maison. Connexion requise, 10 recherches par jour et par compte, rien n'est stocké (règle Google).
 
 **Pas encore fait** : espace artisan (création et gestion de fiche), abonnement Stripe, conversation vocale et
 vidéo en direct, tableau de bord administrateur. « Parler » utilise la dictée du téléphone ; « Montrer en vidéo » prend une photo.
@@ -41,10 +44,12 @@ Seule la clé d'IA est payante (à l'usage, quelques euros suffisent pour tester
    copiez la *Connection string* (mode *Transaction*) : c'est `DATABASE_URL`.
 3. **Anthropic** — sur platform.claude.com, ajoutez un moyen de paiement et créez une clé : `ANTHROPIC_API_KEY`.
 4. **Brave Search** — sur api-dashboard.search.brave.com, créez une clé (5 $ de crédit offerts chaque mois) : `BRAVE_API_KEY`.
-5. **Resend** (offre gratuite) — créez une clé pour envoyer les e-mails de connexion : `RESEND_API_KEY`.
-6. **Vercel** — importez le dépôt GitHub, collez les variables de `.env.example`, ajoutez `CRON_SECRET`
+5. **Google Maps Platform** (1 000 recherches gratuites par mois, puis 35 $ les 1 000) — dans Google Cloud, activez
+   *Places API (New)*, créez une clé limitée à cette API : `GOOGLE_MAPS_API_KEY`.
+6. **Resend** (offre gratuite) — créez une clé pour envoyer les e-mails de connexion : `RESEND_API_KEY`.
+7. **Vercel** — importez le dépôt GitHub, collez les variables de `.env.example`, ajoutez `CRON_SECRET`
    (une longue suite de caractères au hasard), puis déployez.
-7. **Créer les tables** — une seule fois, depuis un ordinateur : `DATABASE_URL=... npm run db:migrate`
+8. **Créer les tables** — une seule fois, depuis un ordinateur : `DATABASE_URL=... npm run db:migrate`
    (ou collez `db/migrations/0001_init.sql` dans l'éditeur SQL de Supabase).
 
 L'offre gratuite de Vercel est réservée à un usage non commercial : passez à l'offre Pro au lancement.

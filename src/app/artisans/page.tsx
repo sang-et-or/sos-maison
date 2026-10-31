@@ -2,6 +2,7 @@ import Link from "next/link";
 import { sql } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { ProCard, type ProView } from "./ProCard";
+import { GoogleResults } from "./GoogleResults";
 
 export const dynamic = "force-dynamic";
 
@@ -88,6 +89,16 @@ export default async function ProsPage({
             ))}
           </ul>
         ))}
+
+      {validCp && (
+        <GoogleResults
+          key={`${cp}-${validCat ?? "multiservices"}`}
+          trade={validCat ?? "multiservices"}
+          tradeName={categories.find((c) => c.slug === validCat)?.name ?? "Artisan"}
+          place={cp}
+          loggedIn={Boolean(user)}
+        />
+      )}
 
       <p className="text-center text-muted">
         Vous êtes artisan&nbsp;? <b className="text-ink">L&apos;inscription est gratuite.</b>

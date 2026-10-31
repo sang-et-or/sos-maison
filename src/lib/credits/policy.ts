@@ -4,7 +4,7 @@
  * Les valeurs viennent de la table settings (modifiables en administration).
  */
 
-export type UsageKind = "message" | "photo" | "search" | "voice_minute" | "video_minute" | "classifier";
+export type UsageKind = "message" | "photo" | "search" | "voice_minute" | "video_minute" | "classifier" | "places";
 
 export type CreditCost = Record<UsageKind, number>;
 
@@ -23,6 +23,7 @@ export const DEFAULT_CREDIT_COST: CreditCost = {
   voice_minute: 5,
   video_minute: 10,
   classifier: 0,
+  places: 0,
 };
 
 export const DEFAULT_PREMIUM_CAPS: PremiumCaps = {
@@ -50,7 +51,7 @@ export interface UsageContext {
   createsRepair?: boolean;
 }
 
-const LABELS: Record<Exclude<UsageKind, "classifier" | "message">, string> = {
+const LABELS: Record<Exclude<UsageKind, "classifier" | "message" | "places">, string> = {
   photo: "photos",
   search: "recherches de tutoriels",
   voice_minute: "minutes de conversation vocale",
@@ -78,7 +79,7 @@ export function decide(
         message: `Vous avez ouvert ${caps.repair} dépannages ce mois-ci, la limite de l'usage raisonnable. Vous pouvez continuer vos dépannages en cours ; la limite repart le 1er du mois.`,
       };
     }
-    if (kind === "message" || kind === "classifier") return { allowed: true, credits: 0 };
+    if (kind === "message" || kind === "classifier" || kind === "places") return { allowed: true, credits: 0 };
     const cap = caps[kind];
     if (ctx.monthUsage + quantity > cap) {
       return {
