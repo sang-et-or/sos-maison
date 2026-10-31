@@ -99,12 +99,13 @@ export async function* runAssistant(opts: {
   const canCard = tutorialAllowed(opts.risk);
   let searches = 0;
   let card: RepairCard | null = null;
+  let cardShown = false; // booléen séparé : évite une inférence circulaire de types
   let text = "";
 
   for (let round = 0; round < MAX_SEARCHES + 2; round++) {
     const tools: Anthropic.Tool[] = [];
     if (canSearch && searches < MAX_SEARCHES) tools.push(SEARCH_TOOL);
-    const offerCard: boolean = canCard && card === null;
+    const offerCard = canCard && !cardShown;
     if (offerCard) tools.push(CARD_TOOL as Anthropic.Tool);
     const stream = anthropic().messages.stream({
       model: MODELS.chat,
@@ -139,6 +140,7 @@ export async function* runAssistant(opts: {
         if (!c) console.warn("Fiche refusée", canCard ? JSON.stringify(tu.input).slice(0, 500) : "niveau de risque");
         if (c) {
           card = c;
+          cardShown = true;
           yield { type: "card", card: c };
         }
         results.push({
