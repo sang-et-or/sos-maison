@@ -36,10 +36,10 @@ vidéo en direct, tableau de bord administrateur. « Parler » utilise la dicté
 
 ## Version installable publique (GitHub Pages)
 
-Le dossier `pages/` contient une version autonome de SOS Maison, installable sur téléphone et utilisable hors
+Le dossier `appli/` contient une version autonome de SOS Maison, installable sur téléphone et utilisable hors
 connexion : guides illustrés, entretien de saison, écran d'urgence, recherche d'artisans, équipements et historique
 (enregistrés sur le téléphone). Elle est publiée automatiquement par `.github/workflows/pages.yml` à chaque
-modification du dossier. Sans serveur, l'assistant IA n'y répond pas : il oriente vers les guides et le bon artisan.
+modification du dossier `appli/`. Sans serveur, l'assistant IA n'y répond pas : il oriente vers les guides et le bon artisan.
 L'assistant complet arrive avec la mise en ligne du site Next.js ci-dessous.
 
 ## Mettre le site en ligne gratuitement

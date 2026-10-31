@@ -3,7 +3,7 @@ name: Publier la version installable (GitHub Pages)
 on:
   push:
     branches: [main]
-    paths: ["pages/**", ".github/workflows/pages.yml"]
+    paths: ["appli/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -28,6 +28,6 @@ jobs:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: pages
+          path: appli
       - id: deploy
         uses: actions/deploy-pages@v4
