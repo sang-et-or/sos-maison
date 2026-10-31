@@ -135,7 +135,7 @@ export async function* runAssistant(opts: {
     const results: Anthropic.ToolResultBlockParam[] = [];
     for (const tu of toolUses) {
       if (tu.name === CARD_TOOL.name) {
-        const c = canCard ? normalizeCard(tu.input, sources.map((s) => s.url)) : null;
+        const c: RepairCard | null = canCard ? normalizeCard(tu.input, sources.map((s) => s.url)) : null;
         if (!c) console.warn("Fiche refusée", canCard ? JSON.stringify(tu.input).slice(0, 500) : "niveau de risque");
         if (c) {
           card = c;
