@@ -1,3 +1,4 @@
+import { publicOrigin } from "@/lib/url";
 import { z } from "zod";
 import { headers } from "next/headers";
 import { createLoginToken, errorResponse, HttpError, isValidEmail } from "@/lib/auth";
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
     const token = await createLoginToken(email, ip);
     // Même réponse si limite atteinte : on ne révèle rien sur l'existence du compte.
     if (token) {
-      const base = process.env.APP_URL ?? new URL(req.url).origin;
+      const base = publicOrigin(req);
       const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/";
       const link = `${base}/api/auth/verify?token=${encodeURIComponent(token)}&next=${encodeURIComponent(safeNext)}`;
       await sendLoginEmail(email.trim().toLowerCase(), link);

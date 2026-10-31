@@ -1,3 +1,4 @@
+import { publicOrigin } from "@/lib/url";
 import { sql } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { stripe, stripeConfigured } from "@/lib/billing/stripe";
@@ -6,7 +7,7 @@ export const runtime = "nodejs";
 
 /** Portail Stripe : moyen de paiement, factures, résiliation. */
 export async function POST(req: Request) {
-  const base = process.env.APP_URL ?? new URL(req.url).origin;
+  const base = publicOrigin(req);
   const user = await currentUser();
   if (!user) return Response.redirect(`${base}/connexion?next=/compte`, 303);
   const [sub] = await sql<{ stripe_customer_id: string }[]>`

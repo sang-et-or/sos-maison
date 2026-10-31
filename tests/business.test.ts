@@ -88,3 +88,15 @@ test("Voix : texte lisible et découpé", () => {
   assert.ok(parts.length >= 3 && parts.every((p) => p.length <= 220));
   assert.equal(parts[0], "Phrase courte.");
 });
+
+import { publicOrigin } from "../src/lib/url";
+test("Adresse publique du site derrière l'hébergeur", () => {
+  const req = (h: Record<string, string>) => new Request("http://localhost:10000/api/x", { headers: h });
+  delete process.env.APP_URL;
+  assert.equal(publicOrigin(req({ "x-forwarded-host": "sos-maison.onrender.com", "x-forwarded-proto": "https" })), "https://sos-maison.onrender.com");
+  process.env.APP_URL = "http://localhost:3000";
+  assert.equal(publicOrigin(req({ host: "sos-maison.onrender.com" })), "https://sos-maison.onrender.com", "APP_URL locale ignorée en ligne");
+  process.env.APP_URL = "https://sos-maison.fr/";
+  assert.equal(publicOrigin(req({ host: "autre.example" })), "https://sos-maison.fr");
+  delete process.env.APP_URL;
+});
