@@ -37,10 +37,21 @@ jobs:
       - name: Tests de la base de données
         run: npm run test:db
       - name: Compiler le site
-        run: npm run build
+        run: |
+          set -o pipefail
+          if ! npm run build 2>&1 | tee build.log; then
+            msg=$(grep -vE '^\s*$' build.log | tail -60 | sed -e 's/%/%25/g' -e 's/\r//g' | awk '{printf "%s%%0A", $0}')
+            echo "::error title=Compilation::$msg"
+            exit 1
+          fi
       - name: Démarrer et vérifier les pages
         run: |
           npm run db:seed
           npx next start -p 3000 &
           for i in $(seq 1 30); do curl -sf http://localhost:3000/ > /dev/null && break; sleep 1; done
-          npx tsx tests/smoke.ts
+          set -o pipefail
+          if ! npx tsx tests/smoke.ts 2>&1 | tee smoke.log; then
+            msg=$(tail -40 smoke.log | sed -e 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+            echo "::error title=Test de bout en bout::$msg"
+            exit 1
+          fi
