@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GUIDES, ILLUSTRATIONS, guideById } from "@/lib/guides";
 import { GuideSteps } from "./GuideSteps";
+import { HARDWARE_STORES_URL, shoppingUrl } from "@/lib/shopping";
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ id: g.id }));
@@ -51,8 +52,16 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
         <section className="rounded-3xl bg-white p-4">
           <h2 className="section-title text-lg">Matériel</h2>
           <ul className="mt-2 flex flex-wrap gap-2">
-            {g.outils.map((o) => <li key={o} className="badge bg-paper text-[0.92rem]">{o}</li>)}
+            {g.outils.map((o) => (
+              <li key={o}>
+                <a href={shoppingUrl(o)} target="_blank" rel="noopener noreferrer nofollow" aria-label={`Chercher « ${o} » sur Google Shopping`}
+                   className="inline-flex items-center gap-1 rounded-full bg-paper px-3 py-1.5 text-[0.92rem] font-bold hover:bg-sun-50">🛒 {o}</a>
+              </li>
+            ))}
           </ul>
+          <a href={HARDWARE_STORES_URL} target="_blank" rel="noopener noreferrer nofollow" className="mt-2 inline-block text-[0.92rem] font-bold text-sky-700 underline">
+            📍 Magasins de bricolage près de chez moi
+          </a>
         </section>
       )}
 

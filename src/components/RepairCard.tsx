@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { RepairCard as Card } from "@/lib/ai/card";
 import { formatCost, formatDuration } from "@/lib/ai/card";
+import { HARDWARE_STORES_URL, shoppingUrl } from "@/lib/shopping";
 import type { Source } from "./RichText";
 
 /** Fiche de réparation : diagnostic, outils, sécurité, étapes à cocher avec progression. */
@@ -52,12 +53,31 @@ export function RepairCard(props: {
         <span><b>Diagnostic :</b> {card.diagnostic}</span>
       </p>
 
-      {(card.outils.length > 0 || duration || cost) && (
-        <ul className="flex flex-wrap gap-1.5" aria-label="Outils, durée et coût">
-          {card.outils.map((o) => <li key={o} className="badge bg-sun-50 text-ink">{o}</li>)}
+      {(duration || cost) && (
+        <ul className="flex flex-wrap gap-1.5" aria-label="Durée et coût">
           {duration && <li className="badge bg-sky-50 text-sky-700">⏱ {duration}</li>}
           {cost && <li className="badge bg-mint-50 text-mint-700">Pièces : {cost}</li>}
         </ul>
+      )}
+
+      {card.outils.length > 0 && (
+        <div className="space-y-2 rounded-2xl bg-sun-50 px-3 py-2.5">
+          <b className="block text-[0.95rem]">Matériel — touchez pour le trouver</b>
+          <ul className="flex flex-wrap gap-1.5" aria-label="Matériel nécessaire">
+            {card.outils.map((o) => (
+              <li key={o}>
+                <a href={shoppingUrl(o)} target="_blank" rel="noopener noreferrer nofollow"
+                   aria-label={`Chercher « ${o} » sur Google Shopping`}
+                   className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[0.88rem] font-bold text-ink ring-1 ring-sun hover:bg-sun/20">
+                  🛒 {o}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href={HARDWARE_STORES_URL} target="_blank" rel="noopener noreferrer nofollow" className="inline-block text-[0.88rem] font-bold text-sky-700 underline">
+            📍 Magasins de bricolage près de chez moi
+          </a>
+        </div>
       )}
 
       <p className="rounded-2xl bg-tangerine-50 px-3 py-2.5 text-[0.95rem]">

@@ -27,7 +27,7 @@ export const CARD_TOOL = {
       titre: { type: "string", description: "Titre court de la réparation, ex. « Régler le flotteur »." },
       diagnostic: { type: "string", description: "Cause probable en une phrase simple." },
       securite: { type: "string", description: "Mesure de sécurité à prendre avant de commencer (couper l'eau, débrancher…)." },
-      outils: { type: "array", items: { type: "string" }, description: "Outils et pièces nécessaires, avec prix approximatif des pièces." },
+      outils: { type: "array", items: { type: "string" }, description: "Outils et pièces nécessaires, un par élément, nommés comme en magasin pour être trouvés facilement (ex. « Bouton de thermostat universel axe 6 mm (environ 8 €) »). Prix approximatif entre parenthèses." },
       etapes: { type: "array", items: { type: "string" }, description: "2 à 10 étapes, une action concrète par étape. Citer une source avec [n] si utile." },
       duree_minutes: { type: "integer", description: "Durée estimée." },
       cout_min_eur: { type: "integer", description: "Coût minimum des pièces en euros (0 si aucune)." },

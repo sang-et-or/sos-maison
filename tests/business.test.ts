@@ -123,3 +123,12 @@ test("Historique : la photo reste visible aux tours suivants", () => {
   assert.equal(t2.length, 1);
   assert.ok(Array.isArray(t2[0].content) && t2[0].content.length === 3);
 });
+
+import { shoppingQuery, shoppingUrl } from "../src/lib/shopping";
+test("Matériel : recherche Google sans les prix", () => {
+  assert.equal(shoppingQuery("Joint de siphon 40 mm (environ 3 €)"), "Joint de siphon 40 mm");
+  assert.equal(shoppingQuery("Bouton de thermostat – environ 5 à 10 €"), "Bouton de thermostat");
+  assert.equal(shoppingQuery("Clé de purge, 2 €"), "Clé de purge");
+  assert.equal(shoppingQuery("Tournevis plat"), "Tournevis plat");
+  assert.match(shoppingUrl("Clé de purge (3 €)"), /^https:\/\/www\.google\.com\/search\?tbm=shop&hl=fr&gl=fr&q=Cl%C3%A9%20de%20purge$/);
+});
