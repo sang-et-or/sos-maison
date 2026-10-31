@@ -100,3 +100,26 @@ test("Adresse publique du site derrière l'hébergeur", () => {
   assert.equal(publicOrigin(req({ host: "autre.example" })), "https://sos-maison.fr");
   delete process.env.APP_URL;
 });
+
+import { buildTurns } from "../src/lib/ai/history";
+test("Historique : la photo reste visible aux tours suivants", () => {
+  const msg = (id: number, role: "user" | "assistant", content: string) => ({ id, role, content, card: null, card_done: [] });
+  const history = [msg(1, "user", "Mon radiateur ne chauffe plus"), msg(2, "assistant", "Envoyez une photo"), msg(3, "user", "Je souhaite changer ça"),
+    msg(4, "assistant", "C'est un thermostat"), msg(5, "user", "Je veux changer le thermostat")];
+  const photos = [{ id: "p1", message_id: 3, mime_type: "image/jpeg", base64: "AAAA" }];
+  const turns = buildTurns(history, photos, 5);
+  assert.equal(turns.length, 5);
+  const t3 = turns[2].content;
+  assert.ok(Array.isArray(t3) && t3[0].type === "image", "photo renvoyée au tour suivant");
+  assert.ok(Array.isArray(t3) && t3.at(-1)?.type === "text" && /photo jointe/.test((t3.at(-1) as { text: string }).text));
+  // Plus de 4 photos : les plus anciennes sont remplacées par une note.
+  const many = [1, 3, 5].flatMap((m) => [0, 1].map((k) => ({ id: `p${m}${k}`, message_id: m, mime_type: "image/png", base64: "B" })));
+  const t = buildTurns(history, many, 5);
+  const images = t.flatMap((x) => (Array.isArray(x.content) ? x.content.filter((b) => b.type === "image") : []));
+  assert.equal(images.length, 4);
+  assert.match(String(t[0].content), /ne sont plus renvoyées/);
+  // Deux messages utilisateur consécutifs (dont un avec photo) : fusionnés, rôles alternés.
+  const t2 = buildTurns([msg(1, "user", "a"), msg(2, "user", "b")], [{ id: "x", message_id: 2, mime_type: "image/jpeg", base64: "C" }], 2);
+  assert.equal(t2.length, 1);
+  assert.ok(Array.isArray(t2[0].content) && t2[0].content.length === 3);
+});

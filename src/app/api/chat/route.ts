@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type Anthropic from "@anthropic-ai/sdk";
 import { sql } from "@/lib/db";
 import { errorResponse, HttpError, requireUser } from "@/lib/auth";
 import { chargeOrThrow } from "@/lib/usage";
@@ -7,6 +6,7 @@ import { createRepair, getOwnedRepair, listMessages } from "@/lib/repairs";
 import { classifyText, combine, type RiskLevel } from "@/lib/safety/risk";
 import { emergencyGuidance, proOnlyMessage } from "@/lib/safety/emergency";
 import { classifyWithAI, runAssistant, type ChatTurn } from "@/lib/ai/assistant";
+import { buildTurns, MAX_IMAGES } from "@/lib/ai/history";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -119,44 +119,18 @@ export async function POST(req: Request) {
           send({ type: "pro", category: risk.pro, message: proOnlyMessage(risk.hazards) });
         }
 
-        // 5. Historique + photos du message courant.
+        // 5. Historique, avec les photos récentes renvoyées à chaque tour (sinon l'IA oublie ce qu'elle a vu).
         const history = await listMessages(repair.id, 30);
-        const photos = body.photoIds.length
-          ? await sql<{ mime_type: string; bytes: Uint8Array }[]>`
-              select mime_type, bytes from attachments
-              where message_id = ${userMsg.id} and repair_id = ${repair.id} order by created_at`
-          : [];
-        const turns: ChatTurn[] = [];
-        // Les fiches affichées sont résumées pour que l'assistant sache où en est l'utilisateur.
-        const textOf = (m: (typeof history)[number]) =>
-          m.card
-            ? `${m.content}\n\n[Fiche affichée « ${m.card.titre} » : ${m.card.etapes.map((e, i) => `${i + 1}. ${e}`).join(" ")} — étapes cochées par l'utilisateur : ${m.card_done.length}/${m.card.etapes.length}]`.trim()
-            : m.content;
-        for (const m of history) {
-          if (m.role === "system") continue;
-          const isCurrent = m.id === userMsg.id;
-          if (isCurrent && photos.length) {
-            const content: Anthropic.ContentBlockParam[] = photos.map((p) => ({
-              type: "image",
-              source: {
-                type: "base64",
-                media_type: p.mime_type as "image/jpeg" | "image/png" | "image/webp",
-                data: Buffer.from(p.bytes).toString("base64"),
-              },
-            }));
-            content.push({ type: "text", text: textOf(m) });
-            turns.push({ role: "user", content });
-          } else {
-            const prev = turns.at(-1);
-            // L'API exige l'alternance des rôles : on fusionne deux messages consécutifs du même rôle.
-            if (prev && prev.role === m.role && typeof prev.content === "string") {
-              prev.content += "\n\n" + textOf(m);
-            } else {
-              turns.push({ role: m.role, content: textOf(m) });
-            }
-          }
-        }
-        while (turns.length && turns[0].role !== "user") turns.shift();
+        const photoRows = await sql<{ id: string; message_id: number; mime_type: string; bytes: Uint8Array }[]>`
+          select id, message_id, mime_type, bytes from attachments
+          where repair_id = ${repair.id} and message_id is not null and kind = 'photo'
+          order by message_id desc, created_at desc limit ${MAX_IMAGES * 3}`;
+        // Seules les plus récentes partent avec leur contenu ; les autres sont signalées par une note.
+        const turns = buildTurns(
+          history,
+          photoRows.map((p, i) => ({ id: p.id, message_id: Number(p.message_id), mime_type: p.mime_type, base64: i < MAX_IMAGES ? Buffer.from(p.bytes).toString("base64") : "" })),
+          userMsg.id,
+        ) as ChatTurn[];
 
         const [{ premium }] = await sql<{ premium: boolean }[]>`select is_premium(${userId}) as premium`;
         const equipment = await sql<{ label: string }[]>`
