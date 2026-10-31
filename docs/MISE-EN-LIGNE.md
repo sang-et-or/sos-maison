@@ -27,31 +27,38 @@ Les tables sont créées automatiquement par Vercel au premier déploiement.
    de domaine dans **Domains** (Resend indique les lignes à copier chez votre hébergeur de domaine), puis utilisez
    par exemple `SOS Maison <bonjour@votre-domaine.fr>`.
 
-## 4. Le site — Vercel
+## 4. Le site — Render
 
-1. Créez un compte sur **vercel.com** avec **Continue with GitHub**.
-2. Ouvrez ce lien : il copie le projet et demande les variables une par une.
+1. Créez un compte sur **render.com** avec **GitHub** (bouton *Sign in with GitHub*) et autorisez l'accès au dépôt `sos-maison`.
+2. Ouvrez ce lien : Render lit le fichier `render.yaml` du dépôt et prépare tout (serveur à Francfort, compilation,
+   démarrage).
 
-   https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsang-et-or%2Fsos-maison&project-name=sos-maison&env=DATABASE_URL,ANTHROPIC_API_KEY,RESEND_API_KEY,EMAIL_FROM,ADMIN_EMAILS,CRON_SECRET,APP_URL
+   https://render.com/deploy?repo=https://github.com/sang-et-or/sos-maison
 
-   Ou bien : **Add New → Project**, choisissez le dépôt `sos-maison`, ouvrez **Environment Variables**.
-3. Remplissez :
+3. Render demande les variables une par une :
 
    | Variable | Valeur |
    | --- | --- |
    | `DATABASE_URL` | l'adresse Supabase (étape 1) |
+   | `APP_URL` | `https://sos-maison.onrender.com` (à corriger après si Render donne une autre adresse) |
    | `ANTHROPIC_API_KEY` | la clé Anthropic (étape 2) |
    | `RESEND_API_KEY` | la clé Resend (étape 3) |
-   | `EMAIL_FROM` | `SOS Maison <onboarding@resend.dev>` pour commencer |
-   | `ADMIN_EMAILS` | votre adresse e-mail (vous aurez accès à l'administration) |
-   | `CRON_SECRET` | une longue suite de lettres et chiffres au hasard |
-   | `APP_URL` | `https://sos-maison.vercel.app` (corrigez après le déploiement si Vercel donne une autre adresse) |
+   | `ADMIN_EMAILS` | votre adresse e-mail (accès à l'administration) |
+   | `CRON_SECRET` | une longue suite de lettres et chiffres au hasard (notez-la) |
+   | `BRAVE_API_KEY`, `GOOGLE_MAPS_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | laissez vide pour l'instant (voir « En option ») |
 
-4. **Région** : dans *Settings → Functions*, choisissez **Paris (cdg1)** (déjà indiqué dans `vercel.json`).
-5. **Deploy**. En deux à trois minutes, le site est en ligne. Vérifiez que l'adresse affichée correspond à `APP_URL` ;
-   sinon corrigez `APP_URL` dans *Settings → Environment Variables*, puis *Deployments → … → Redeploy*.
+4. Formule : **Starter** (payante, le site reste éveillé). Pour un simple essai, vous pouvez choisir **Free** :
+   le site s'endort après 15 minutes sans visite et met environ une minute à se réveiller.
+5. **Apply / Deploy**. La première compilation prend 3 à 5 minutes ; les tables de la base sont créées à ce moment.
+6. Vérifiez l'adresse affichée en haut de la page du service. Si elle diffère de `APP_URL`, corrigez `APP_URL` dans
+   *Environment*, puis *Manual Deploy → Deploy latest commit*.
+7. **Purge quotidienne des vieilles photos** : sur GitHub, dépôt `sos-maison` → *Settings → Secrets and variables →
+   Actions → New repository secret* : `SITE_URL` (l'adresse Render) et `CRON_SECRET` (la même valeur qu'à l'étape 3).
 
 À partir de là, chaque modification envoyée sur GitHub met le site à jour automatiquement.
+
+**Autre possibilité : Vercel.** Le projet fonctionne aussi sur Vercel (bouton dans le README) ; la purge y est
+alors faite par Vercel. L'offre gratuite de Vercel ne s'endort pas mais est réservée à un usage non commercial.
 
 ## 5. Premier essai
 
@@ -74,12 +81,12 @@ variable `BRAVE_API_KEY`. Sans elle, Toit-Toit répond sans citer de tutoriels e
    `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`,
    `customer.subscription.deleted`. Copiez le **Signing secret** → `STRIPE_WEBHOOK_SECRET`.
 4. *Settings → Billing → Customer portal* : activez le portail (résiliation et factures).
-5. Redéployez. Testez avec la carte `4242 4242 4242 4242`, date future, code au choix.
+5. Redéployez (*Manual Deploy*). Testez avec la carte `4242 4242 4242 4242`, date future, code au choix.
 6. Quand tout fonctionne, refaites les étapes 2 à 4 en **mode production** et remplacez les deux clés.
 
 ## Avant d'ouvrir au public
 
 - Complétez les pages **Mentions légales**, **Conditions d'utilisation** et **Confidentialité** (les passages entre
   crochets) et faites-les relire par un juriste.
-- Passez Vercel en offre **Pro** (l'offre gratuite est réservée à un usage non commercial).
+- Gardez Render en formule payante (Starter ou plus) : la formule gratuite n'est pas faite pour la production.
 - Activez dans Supabase les sauvegardes adaptées à votre offre.

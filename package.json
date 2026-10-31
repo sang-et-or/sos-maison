@@ -8,13 +8,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "tsx scripts/migrate.ts && next build",
-    "start": "next start",
+    "vercel-build": "npm run deploy-build",
+    "start": "next start -p ${PORT:-3000}",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "test:db": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f db/tests/schema_test.sql -f db/tests/cards_test.sql -f db/tests/billing_test.sql",
     "db:migrate": "tsx scripts/migrate.ts",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "deploy-build": "tsx scripts/migrate.ts && next build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": ">=0.60.0",

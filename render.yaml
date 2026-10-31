@@ -1,0 +1,39 @@
+# Configuration Render (Blueprint) : le site SOS Maison à Francfort, base de données chez Supabase.
+# Render → New → Blueprint → dépôt sos-maison : les variables marquées « sync: false » sont demandées à la création.
+services:
+  - type: web
+    name: sos-maison
+    runtime: node
+    region: frankfurt
+    plan: starter            # « free » possible pour essayer (le site s'endort après 15 min sans visite)
+    autoDeploy: true
+    buildCommand: npm install --include=dev --no-audit --no-fund && npm run deploy-build
+    startCommand: npm start
+    healthCheckPath: /guides
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        value: "SOS Maison <onboarding@resend.dev>"
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: CRON_SECRET
+        sync: false
+      - key: BRAVE_API_KEY
+        sync: false
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false

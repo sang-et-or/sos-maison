@@ -1,5 +1,6 @@
 # SOS Maison — version 0.4
 
+[![Déployer sur Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/sang-et-or/sos-maison)
 [![Déployer sur Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsang-et-or%2Fsos-maison&project-name=sos-maison&env=DATABASE_URL,ANTHROPIC_API_KEY,RESEND_API_KEY,EMAIL_FROM,ADMIN_EMAILS,CRON_SECRET,APP_URL&envLink=https%3A%2F%2Fgithub.com%2Fsang-et-or%2Fsos-maison%2Fblob%2Fmain%2Fdocs%2FMISE-EN-LIGNE.md)
 
 Assistant de dépannage domestique avec Toit-Toit, la mascotte : conversation avec l'IA, photos, caméra en direct,
@@ -56,11 +57,10 @@ L'assistant complet arrive avec la mise en ligne du site Next.js ci-dessous.
 
 ## Mettre le site en ligne
 
-Le guide complet est dans [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md) : Supabase, Anthropic, Resend, Vercel,
-puis en option Brave, Google Maps et Stripe. Les tables sont créées automatiquement à chaque déploiement Vercel
-(`npm run vercel-build` applique les migrations manquantes, puis compile).
-
-L'offre gratuite de Vercel est réservée à un usage non commercial : passez à l'offre Pro au lancement.
+Le guide complet est dans [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md) : Supabase, Anthropic, Resend, Render
+(fichier `render.yaml`), puis en option Brave, Google Maps et Stripe. Les tables sont créées automatiquement à chaque
+déploiement (`npm run deploy-build` applique les migrations manquantes, puis compile). La purge quotidienne est faite
+par GitHub Actions (`.github/workflows/purge.yml`). Vercel reste possible (`vercel.json`).
 
 ## Développement
 

@@ -1,6 +1,6 @@
 import { sql } from "@/lib/db";
 
-/** Tâche quotidienne (Vercel Cron) : purge des photos expirées et des jetons de connexion périmés. */
+/** Tâche quotidienne (Vercel Cron ou GitHub Actions) : purge des photos expirées et des jetons de connexion périmés. */
 export async function GET(req: Request) {
   const secret = process.env.CRON_SECRET;
   if (!secret || req.headers.get("authorization") !== `Bearer ${secret}`) {
