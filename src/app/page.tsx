@@ -1,6 +1,7 @@
 import { currentUser } from "@/lib/auth";
 import Link from "next/link";
 import { Starter } from "@/components/Starter";
+import { InstallCard } from "@/components/InstallApp";
 import { SEASONS, seasonOf, guideById } from "@/lib/guides";
 
 const STEPS = [
@@ -51,6 +52,8 @@ export default async function Home() {
           })}
         </ul>
       </section>
+
+      <InstallCard />
 
       <section className="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-3xl bg-danger-600 px-4 py-3.5 text-white">
         <svg viewBox="0 0 40 40" className="h-10 w-10" aria-hidden><circle cx="20" cy="20" r="20" fill="#fff" /><path d="M20 10v13" stroke="#d62839" strokeWidth="4" strokeLinecap="round" /><circle cx="20" cy="29" r="2.6" fill="#d62839" /></svg>

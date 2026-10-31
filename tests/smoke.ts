@@ -33,7 +33,7 @@ async function main() {
   const home = await r.text();
   assert.match(home, /Quel est votre problème/);
   assert.match(home.replace(/\u00a0|&nbsp;/g, " "), /0 800 47 33 33/);
-  for (const p of ["/guides", "/guides/radiateur", "/connexion", "/cgu", "/confidentialite", "/mentions-legales", "/manifest.webmanifest", "/sw.js", "/icons/icon-192.png"]) {
+  for (const p of ["/guides", "/guides/radiateur", "/installer", "/connexion", "/cgu", "/confidentialite", "/mentions-legales", "/manifest.webmanifest", "/sw.js", "/icons/icon-192.png"]) {
     r = await get(p);
     assert.equal(r.status, 200, p);
   }

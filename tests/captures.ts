@@ -47,6 +47,7 @@ async function main() {
     ["07-inscription-artisan", "/pro", admin],
     ["08-administration", "/admin", admin],
     ["09-artisans", "/artisans?cp=69003&metier=plombier", user],
+    ["10-installer", "/installer", null],
   ];
   for (const [name, path, cookie] of shots) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, locale: "fr-FR" });

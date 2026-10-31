@@ -124,6 +124,9 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
       )}
 
       <nav className="grid gap-2" aria-label="Autres espaces">
+        <Link href="/installer" className="flex items-center justify-between rounded-3xl bg-white px-4 py-3 font-bold">
+          📲 Installer l&apos;appli sur mon téléphone <span aria-hidden>›</span>
+        </Link>
         <Link href="/pro" className="flex items-center justify-between rounded-3xl bg-white px-4 py-3 font-bold">
           {pro ? "Mon espace artisan" : "Vous êtes artisan ? Créez votre fiche"} <span aria-hidden>›</span>
         </Link>
