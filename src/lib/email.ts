@@ -78,3 +78,28 @@ export async function sendServiceRequestEmail(to: string, r: {
   });
   if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
 }
+
+/** Informe l'artisan de la décision sur sa fiche. */
+export async function sendProReviewEmail(to: string, r: { company: string; status: "verified" | "suspended" | "pending"; note?: string | null }): Promise<void> {
+  const key = process.env.RESEND_API_KEY;
+  const base = process.env.APP_URL ?? "";
+  const body =
+    r.status === "verified"
+      ? `<p>Bonne nouvelle : la fiche <strong>${esc(r.company)}</strong> est maintenant visible dans l'annuaire SOS Maison. Les demandes des particuliers de votre zone arriveront par e-mail et dans votre espace artisan.</p>`
+      : r.status === "suspended"
+        ? `<p>La fiche <strong>${esc(r.company)}</strong> n'a pas pu être publiée dans l'annuaire SOS Maison.</p>`
+        : `<p>La fiche <strong>${esc(r.company)}</strong> est en cours de vérification.</p>`;
+  const html = `<div style="font-family:system-ui,sans-serif;font-size:16px;line-height:1.5;color:#1b1f3b">${body}${
+    r.note ? `<p><strong>Message de l'équipe :</strong> ${esc(r.note)}</p>` : ""
+  }<p><a href="${base}/pro">Ouvrir mon espace artisan</a></p></div>`;
+  if (!key) {
+    console.info(`[dev] Décision artisan pour ${to} : ${r.status}`);
+    return;
+  }
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: process.env.EMAIL_FROM ?? "SOS Maison <onboarding@resend.dev>", to, subject: `Votre fiche SOS Maison : ${r.status === "verified" ? "en ligne" : "mise à jour"}`, html }),
+  });
+  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
+}

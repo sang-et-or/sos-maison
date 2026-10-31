@@ -1,0 +1,1086 @@
+{
+ "ill": {
+  "vanne": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Robinet d'arrêt à quart de tour : poignée en travers du tuyau pour couper l'eau\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"20\" y=\"96\" width=\"280\" height=\"22\" rx=\"6\" fill=\"#c9d6ea\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"130\" y=\"82\" width=\"60\" height=\"50\" rx=\"10\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"152\" y=\"40\" width=\"16\" height=\"44\" rx=\"4\" fill=\"#d62839\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"118\" y=\"30\" width=\"84\" height=\"16\" rx=\"8\" fill=\"#d62839\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M226 40a40 40 0 0 1 10 46\" fill=\"none\" stroke=\"#ff6b2c\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"244\" y=\"66\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">¼ de tour</text><text x=\"20\" y=\"150\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">Poignée en travers du tuyau = eau coupée</text><text x=\"20\" y=\"168\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">Poignée dans le sens du tuyau = eau ouverte</text></svg>",
+  "tableau": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Tableau électrique : une manette est tombée en position basse\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"40\" y=\"18\" width=\"240\" height=\"144\" rx=\"12\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"62\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"68\" y=\"58\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#1b1f3b\"/><rect x=\"98\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"104\" y=\"58\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#1b1f3b\"/><rect x=\"134\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"140\" y=\"58\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#1b1f3b\"/><rect x=\"170\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"176\" y=\"88\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#ff6b2c\"/><rect x=\"206\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"212\" y=\"58\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#1b1f3b\"/><rect x=\"242\" y=\"52\" width=\"26\" height=\"62\" rx=\"5\" fill=\"#e3e7f1\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"248\" y=\"58\" width=\"14\" height=\"20\" rx=\"3\" fill=\"#1b1f3b\"/><path d=\"M181 140L181 118\" stroke=\"#ff6b2c\" stroke-width=\"2.5\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><text x=\"160\" y=\"40\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Manette tombée</text><text x=\"181\" y=\"156\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Remontez-la d'un geste franc</text></svg>",
+  "radiateur": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Radiateur : la vis de purge est en haut, côté opposé à l'arrivée d'eau\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"40\" y=\"40\" width=\"180\" height=\"110\" rx=\"10\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"56\" y=\"52\" width=\"18\" height=\"86\" rx=\"6\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"1.5\"/><rect x=\"88\" y=\"52\" width=\"18\" height=\"86\" rx=\"6\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"1.5\"/><rect x=\"120\" y=\"52\" width=\"18\" height=\"86\" rx=\"6\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"1.5\"/><rect x=\"152\" y=\"52\" width=\"18\" height=\"86\" rx=\"6\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"1.5\"/><rect x=\"184\" y=\"52\" width=\"18\" height=\"86\" rx=\"6\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"1.5\"/><circle cx=\"232\" cy=\"52\" r=\"8\" fill=\"#ffc83d\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"226\" y=\"70\" width=\"40\" height=\"22\" rx=\"4\" fill=\"#3d7bff\" opacity=\".85\"/><path d=\"M240 52h30\" stroke=\"#1b1f3b\" stroke-width=\"5\" stroke-linecap=\"round\"/><text x=\"248\" y=\"36\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Vis de purge</text><text x=\"246\" y=\"110\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Chiffon + récipient</text><text x=\"40\" y=\"170\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">En haut, du côté opposé à l'arrivée d'eau</text></svg>",
+  "manometre": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Manomètre de chaudière : l'aiguille doit être dans la zone verte, entre 1 et 1,5 bar\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"70\" y=\"20\" width=\"180\" height=\"146\" rx=\"16\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"160\" cy=\"86\" r=\"46\" fill=\"#f4f6fb\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M127 116A46 46 0 0 1 120 70\" stroke=\"#d62839\" stroke-width=\"8\" fill=\"none\"/><path d=\"M122 64A46 46 0 0 1 175 42\" stroke=\"#22b8a0\" stroke-width=\"8\" fill=\"none\"/><path d=\"M180 44A46 46 0 0 1 200 110\" stroke=\"#d62839\" stroke-width=\"8\" fill=\"none\"/><path d=\"M160 86L142 56\" stroke=\"#1b1f3b\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"160\" cy=\"86\" r=\"5\" fill=\"#1b1f3b\"/><text x=\"160\" y=\"150\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Zone verte : 1 à 1,5 bar</text><text x=\"104\" y=\"112\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">0</text><text x=\"206\" y=\"112\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">3</text></svg>",
+  "chaudiere": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Chaudière et attestation d'entretien remise par le professionnel\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"40\" y=\"18\" width=\"110\" height=\"146\" rx=\"12\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"58\" y=\"36\" width=\"74\" height=\"30\" rx=\"6\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><circle cx=\"95\" cy=\"120\" r=\"14\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"180\" y=\"40\" width=\"110\" height=\"120\" rx=\"10\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M196 66h78M196 84h78M196 102h60\" stroke=\"#c9d6ea\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"262\" cy=\"134\" r=\"14\" fill=\"#22b8a0\"/><path d=\"M255 134l5 5 9-10\" stroke=\"#fff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><text x=\"235\" y=\"32\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Attestation à garder 2 ans</text><text x=\"95\" y=\"56\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Code ?</text></svg>",
+  "daaf": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Détecteur de fumée au plafond avec son bouton test\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"0\" y=\"0\" width=\"320\" height=\"34\" fill=\"#e3e7f1\"/><circle cx=\"160\" cy=\"58\" r=\"40\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"160\" cy=\"58\" r=\"12\" fill=\"#d62839\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><path d=\"M118 34h84\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M212 44q8 14 0 28\" stroke=\"#ff6b2c\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M224 40q8 14 0 28\" stroke=\"#ff6b2c\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M236 36q8 14 0 28\" stroke=\"#ff6b2c\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><text x=\"160\" y=\"124\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Appuyez 3 à 5 secondes sur le bouton test</text><text x=\"160\" y=\"144\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Au plafond, au centre, dans le couloir des chambres</text><text x=\"160\" y=\"164\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Loin de la cuisine et de la salle de bain</text></svg>",
+  "exterieur": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Robinet extérieur : fermer la vanne à l'intérieur, puis ouvrir le robinet dehors pour le vider\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"0\" y=\"0\" width=\"160\" height=\"180\" fill=\"#fff6d9\"/><rect x=\"160\" y=\"0\" width=\"160\" height=\"180\" fill=\"#e4edff\"/><rect x=\"152\" y=\"0\" width=\"16\" height=\"180\" fill=\"#c9b79c\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><path d=\"M20 100H260\" stroke=\"#1b1f3b\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M20 100H260\" stroke=\"#c9d6ea\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"70\" y=\"84\" width=\"30\" height=\"32\" rx=\"6\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"62\" y=\"74\" width=\"46\" height=\"10\" rx=\"5\" fill=\"#d62839\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><path d=\"M260 100v24\" stroke=\"#1b1f3b\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M252 84h22\" stroke=\"#1b1f3b\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M260 134v8M266 146v8M254 150v6\" stroke=\"#3d7bff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"85\" y=\"140\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">1. Fermez la vanne</text><text x=\"85\" y=\"156\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">à l'intérieur</text><text x=\"240\" y=\"30\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">2. Ouvrez le robinet</text><text x=\"240\" y=\"46\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">dehors pour le vider</text><text x=\"40\" y=\"30\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">Intérieur</text></svg>",
+  "gouttiere": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Gouttière et échelle tenue par une deuxième personne ; la crapaudine est en haut du tuyau de descente\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><path d=\"M30 86L130 28L230 86\" fill=\"#ff6b2c\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"50\" y=\"86\" width=\"160\" height=\"80\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M26 90h214\" stroke=\"#1b1f3b\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M26 90h214\" stroke=\"#c9d6ea\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M234 94v72\" stroke=\"#1b1f3b\" stroke-width=\"7\"/><path d=\"M262 166L282 72\" stroke=\"#1b1f3b\" stroke-width=\"3\"/><path d=\"M290 166L306 80\" stroke=\"#1b1f3b\" stroke-width=\"3\"/><path d=\"M264 154h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M267.4 138h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M270.8 122h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M274.2 106h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M277.6 90h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M281 74h26\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"234\" cy=\"94\" r=\"7\" fill=\"#22b8a0\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><text x=\"234\" y=\"80\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible, system-ui\">Crapaudine</text><text x=\"296\" y=\"178\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible, system-ui\">Échelle tenue</text></svg>",
+  "aerer": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Fenêtre grande ouverte pendant 5 à 10 minutes, matin et soir\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"30\" y=\"26\" width=\"140\" height=\"130\" rx=\"8\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M100 26v130\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M100 26L150 40V142L100 156\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M44 70q20-10 40 0M44 92q20-10 40 0M44 114q20-10 40 0\" stroke=\"#3d7bff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"240\" cy=\"78\" r=\"44\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M240 78V46\" stroke=\"#1b1f3b\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M240 34A44 44 0 0 1 276 52L240 78z\" fill=\"#22b8a0\" opacity=\".5\"/><text x=\"240\" y=\"142\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">5 à 10 min</text><text x=\"240\" y=\"160\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">matin et soir</text></svg>",
+  "gel": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Tuyau entouré d'un manchon isolant en mousse\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><path d=\"M20 90H300\" stroke=\"#1b1f3b\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M20 90H300\" stroke=\"#c9d6ea\" stroke-width=\"7\" stroke-linecap=\"round\"/><rect x=\"110\" y=\"70\" width=\"150\" height=\"40\" rx=\"20\" fill=\"#8b6cff\" opacity=\".85\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M120 76v28M140 76v28M160 76v28M180 76v28M200 76v28M220 76v28M240 76v28\" stroke=\"#fff\" stroke-width=\"1.5\" opacity=\".5\"/><text x=\"50\" y=\"40\" font-size=\"18\" fill=\"#3d7bff\">❄</text><text x=\"70\" y=\"54\" font-size=\"18\" fill=\"#3d7bff\">❄</text><text x=\"36\" y=\"58\" font-size=\"18\" fill=\"#3d7bff\">❄</text><text x=\"185\" y=\"132\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Manchon isolant en mousse</text><text x=\"185\" y=\"150\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">bien ajusté, joints scotchés</text></svg>",
+  "vmc": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Bouche de VMC démontée et lavée à l'eau savonneuse\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"0\" y=\"0\" width=\"320\" height=\"40\" fill=\"#e3e7f1\"/><circle cx=\"110\" cy=\"96\" r=\"52\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"110\" cy=\"96\" r=\"18\" fill=\"none\" stroke=\"#c9d6ea\" stroke-width=\"5\"/><circle cx=\"110\" cy=\"96\" r=\"30\" fill=\"none\" stroke=\"#c9d6ea\" stroke-width=\"5\"/><circle cx=\"110\" cy=\"96\" r=\"42\" fill=\"none\" stroke=\"#c9d6ea\" stroke-width=\"5\"/><circle cx=\"110\" cy=\"96\" r=\"7\" fill=\"#1b1f3b\"/><rect x=\"200\" y=\"96\" width=\"90\" height=\"56\" rx=\"10\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"226\" cy=\"90\" r=\"7\" fill=\"#fff\" stroke=\"#3d7bff\" stroke-width=\"2\"/><circle cx=\"246\" cy=\"84\" r=\"5\" fill=\"#fff\" stroke=\"#3d7bff\" stroke-width=\"2\"/><circle cx=\"262\" cy=\"92\" r=\"6\" fill=\"#fff\" stroke=\"#3d7bff\" stroke-width=\"2\"/><path d=\"M166 96L196 112\" stroke=\"#ff6b2c\" stroke-width=\"2.5\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><text x=\"110\" y=\"168\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Bouche d'extraction</text><text x=\"245\" y=\"168\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Eau savonneuse</text></svg>",
+  "mousseur": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Mousseur dévissé du robinet et trempé dans du vinaigre blanc\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><path d=\"M40 40h120a20 20 0 0 1 20 20v30\" fill=\"none\" stroke=\"#1b1f3b\" stroke-width=\"16\" stroke-linecap=\"round\"/><path d=\"M40 40h120a20 20 0 0 1 20 20v30\" fill=\"none\" stroke=\"#c9d6ea\" stroke-width=\"10\" stroke-linecap=\"round\"/><rect x=\"168\" y=\"92\" width=\"24\" height=\"16\" rx=\"4\" fill=\"#ffc83d\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M200 112l26 12\" stroke=\"#ff6b2c\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><path d=\"M226 120h60l-8 44h-44z\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M230 136h52\" stroke=\"#ffc83d\" stroke-width=\"3\"/><rect x=\"246\" y=\"140\" width=\"20\" height=\"12\" rx=\"3\" fill=\"#ffc83d\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><text x=\"180\" y=\"136\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible, system-ui\">Mousseur</text><text x=\"256\" y=\"112\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Vinaigre blanc, 1 h</text></svg>",
+  "lv": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Filtre du lave-vaisselle au fond de la cuve, qui se dévisse d'un quart de tour\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"50\" y=\"20\" width=\"220\" height=\"150\" rx=\"12\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"66\" y=\"36\" width=\"188\" height=\"118\" rx=\"8\" fill=\"#e4edff\"/><circle cx=\"160\" cy=\"118\" r=\"24\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"160\" cy=\"118\" r=\"11\" fill=\"#c9d6ea\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><path d=\"M196 94a40 40 0 0 1 4 36\" fill=\"none\" stroke=\"#ff6b2c\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"160\" y=\"62\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Filtre au fond de la cuve</text><text x=\"222\" y=\"104\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">¼ tour</text></svg>",
+  "ll": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Lave-linge : trappe du filtre en bas à droite, plat bas posé devant\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"60\" y=\"14\" width=\"160\" height=\"156\" rx=\"12\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"140\" cy=\"76\" r=\"40\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"164\" y=\"138\" width=\"44\" height=\"24\" rx=\"5\" fill=\"#ffe9df\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"186\" cy=\"150\" r=\"7\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"226\" y=\"156\" width=\"80\" height=\"12\" rx=\"4\" fill=\"#c9d6ea\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><text x=\"186\" y=\"132\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Trappe + filtre</text><text x=\"266\" y=\"148\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Plat bas</text></svg>",
+  "joint": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Joint silicone entre la baignoire et le carrelage\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"30\" y=\"70\" width=\"260\" height=\"70\" rx=\"10\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"30\" y=\"20\" width=\"260\" height=\"50\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M82 20v50\" stroke=\"#c9d6ea\" stroke-width=\"2\"/><path d=\"M134 20v50\" stroke=\"#c9d6ea\" stroke-width=\"2\"/><path d=\"M186 20v50\" stroke=\"#c9d6ea\" stroke-width=\"2\"/><path d=\"M238 20v50\" stroke=\"#c9d6ea\" stroke-width=\"2\"/><path d=\"M290 20v50\" stroke=\"#c9d6ea\" stroke-width=\"2\"/><path d=\"M30 70H290\" stroke=\"#22b8a0\" stroke-width=\"7\"/><path d=\"M60 64l40-40\" stroke=\"#1b1f3b\" stroke-width=\"10\" stroke-linecap=\"round\"/><rect x=\"92\" y=\"10\" width=\"44\" height=\"22\" rx=\"6\" transform=\"rotate(-45 114 21)\" fill=\"#ffc83d\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><text x=\"160\" y=\"100\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Joint silicone sanitaire</text><text x=\"160\" y=\"118\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">lissé au doigt mouillé d'eau savonneuse</text></svg>",
+  "frigo": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Réfrigérateur écarté du mur, grille arrière à dépoussiérer\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"40\" y=\"16\" width=\"110\" height=\"154\" rx=\"12\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M40 72h110\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"132\" y=\"30\" width=\"5\" height=\"30\" rx=\"2\" fill=\"#1b1f3b\"/><rect x=\"190\" y=\"26\" width=\"90\" height=\"128\" rx=\"6\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M204 42h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 58h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 74h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 90h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 106h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 122h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M204 138h62\" stroke=\"#5d6480\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M156 92L186 92\" stroke=\"#ff6b2c\" stroke-width=\"2.5\" stroke-linecap=\"round\" marker-end=\"url(#ah)\"/><text x=\"235\" y=\"170\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Grille arrière : aspirer</text><text x=\"95\" y=\"176\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Laisser 5 à 10 cm</text></svg>",
+  "siphon": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Siphon sous l'évier avec un seau placé dessous\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"40\" y=\"16\" width=\"240\" height=\"30\" rx=\"8\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><path d=\"M160 46v40a24 24 0 0 0 48 0v-10H270\" fill=\"none\" stroke=\"#1b1f3b\" stroke-width=\"16\" stroke-linecap=\"round\"/><path d=\"M160 46v40a24 24 0 0 0 48 0v-10H270\" fill=\"none\" stroke=\"#c9d6ea\" stroke-width=\"10\" stroke-linecap=\"round\"/><path d=\"M140 140h88l-8 32h-72z\" fill=\"#e4edff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"184\" cy=\"110\" r=\"6\" fill=\"#ffc83d\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><text x=\"120\" y=\"86\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible, system-ui\">Siphon</text><text x=\"184\" y=\"134\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Seau dessous</text><text x=\"60\" y=\"70\" font-size=\"12\" font-weight=\"400\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">Dévissez à la main</text></svg>",
+  "porte": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Porte qui frotte : resserrer les vis de la charnière du haut\"><defs><marker id=\"ah\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#ff6b2c\"/></marker></defs><rect width=\"320\" height=\"180\" rx=\"18\" fill=\"#f4f6fb\"/><rect x=\"60\" y=\"14\" width=\"18\" height=\"156\" fill=\"#c9b79c\" stroke=\"#1b1f3b\" stroke-width=\"2\"/><rect x=\"78\" y=\"20\" width=\"160\" height=\"148\" rx=\"4\" fill=\"#fff6d9\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><rect x=\"66\" y=\"34\" width=\"26\" height=\"40\" rx=\"4\" fill=\"#fff\" stroke=\"#1b1f3b\" stroke-width=\"2.5\"/><circle cx=\"79\" cy=\"44\" r=\"3.5\" fill=\"#1b1f3b\"/><circle cx=\"79\" cy=\"64\" r=\"3.5\" fill=\"#1b1f3b\"/><path d=\"M110 40l-24 4\" stroke=\"#ff6b2c\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><path d=\"M90 168h160\" stroke=\"#d62839\" stroke-width=\"4\" stroke-dasharray=\"6 5\"/><text x=\"120\" y=\"44\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible, system-ui\">Resserrez les vis du haut</text><text x=\"170\" y=\"160\" font-size=\"12\" font-weight=\"700\" fill=\"#1b1f3b\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible, system-ui\">Elle frotte ici ?</text></svg>"
+ },
+ "guides": [
+  {
+   "id": "radiateur",
+   "e": "🔥",
+   "bg": "var(--peach)",
+   "ill": "radiateur",
+   "t": "Purger un radiateur",
+   "d": "Radiateur froid en haut, gargouillis",
+   "min": 15,
+   "niveau": "Facile",
+   "cout": "2 à 3 € (clé de purge)",
+   "pourquoi": "De l'air se loge en haut des radiateurs. Il empêche l'eau chaude de circuler : le radiateur chauffe mal, fait du bruit, et la chaudière consomme plus pour rien.",
+   "quand": "Une fois par an, en début d'automne avant de rallumer le chauffage, ou dès qu'un radiateur est froid en haut et chaud en bas.",
+   "secu": "Arrêtez le chauffage et attendez 30 minutes : l'eau qui sort peut être brûlante.",
+   "outils": [
+    "Clé de purge (ou tournevis plat selon le modèle)",
+    "Chiffon",
+    "Petit récipient"
+   ],
+   "s": [
+    {
+     "t": "Arrêtez le chauffage",
+     "x": "Mettez le thermostat au minimum ou la chaudière en mode été, puis attendez que les radiateurs soient tièdes."
+    },
+    {
+     "t": "Commencez par le radiateur le plus bas",
+     "x": "Au rez-de-chaussée, en partant du plus proche de la chaudière. L'air monte : vous le chassez étage par étage.",
+     "astuce": "Notez l'ordre sur un papier si vous avez beaucoup de radiateurs."
+    },
+    {
+     "t": "Repérez la vis de purge",
+     "x": "C'est une petite vis ou un petit carré en haut du radiateur, du côté opposé à l'arrivée d'eau.",
+     "img": "radiateur"
+    },
+    {
+     "t": "Protégez le sol",
+     "x": "Tenez le chiffon et le récipient juste sous la vis : quelques gouttes, souvent noirâtres, vont couler."
+    },
+    {
+     "t": "Ouvrez d'un quart de tour",
+     "x": "Tournez doucement la clé vers la gauche. Vous entendez un sifflement : c'est l'air qui sort. N'ouvrez pas plus, la vis pourrait tomber."
+    },
+    {
+     "t": "Refermez dès que l'eau coule",
+     "x": "Quand l'eau sort en filet continu, sans bulles ni crachotements, refermez vers la droite sans forcer."
+    },
+    {
+     "t": "Faites tous les radiateurs",
+     "x": "Même ordre pour chacun, en montant les étages. Essuyez bien chaque vis."
+    },
+    {
+     "t": "Vérifiez la pression de la chaudière",
+     "x": "Purger fait baisser la pression. L'aiguille du manomètre doit être dans la zone verte, entre 1 et 1,5 bar. Si elle est en dessous, suivez la notice de la chaudière ou demandez au chauffagiste.",
+     "img": "manometre"
+    },
+    {
+     "t": "Rallumez et vérifiez",
+     "x": "Remettez le chauffage. Après une heure, les radiateurs doivent être chauds de haut en bas."
+    }
+   ],
+   "erreurs": [
+    "Purger chauffage allumé : risque de brûlure.",
+    "Dévisser complètement la vis : elle peut tomber et l'eau jaillir.",
+    "Oublier de contrôler la pression ensuite : la chaudière peut se mettre en sécurité."
+   ],
+   "pro": [
+    "Un radiateur reste froid après la purge.",
+    "La pression baisse encore dans les jours qui suivent (fuite possible).",
+    "La vis est bloquée ou abîmée."
+   ],
+   "sources": [
+    [
+     "Régler la pression de la chaudière (TotalEnergies)",
+     "https://www.totalenergies.fr/particuliers/parlons-energie/dossiers-energie/chauffage-et-climatisation/comment-regler-la-pression-de-la-chaudiere"
+    ]
+   ]
+  },
+  {
+   "id": "chaudiere",
+   "e": "🧰",
+   "bg": "var(--peach)",
+   "ill": "chaudiere",
+   "t": "Entretien annuel de la chaudière",
+   "d": "Obligatoire chaque année, par un pro",
+   "min": 60,
+   "niveau": "Faites appel à un pro",
+   "cout": "80 à 200 € la visite",
+   "pourquoi": "Une chaudière mal réglée consomme plus et peut produire du monoxyde de carbone, un gaz invisible et mortel. L'entretien annuel par un professionnel est obligatoire pour les chaudières de 4 à 400 kW (décret du 9 juin 2009).",
+   "quand": "Une fois par an, idéalement en septembre ou octobre, avant le froid : les chauffagistes sont alors plus disponibles.",
+   "secu": "Vous n'intervenez jamais à l'intérieur de la chaudière : ce guide vous aide à préparer la visite et à vérifier qu'elle a bien été faite.",
+   "outils": [
+    "Notice et dernière attestation",
+    "Téléphone"
+   ],
+   "s": [
+    {
+     "t": "Vérifiez qui doit la payer",
+     "x": "Propriétaire occupant : vous. Locataire : c'est à vous aussi, c'est une réparation locative. Chaudière collective : la copropriété s'en charge."
+    },
+    {
+     "t": "Prenez rendez-vous tôt",
+     "x": "Appelez votre chauffagiste ou comparez 2 ou 3 devis. Un contrat annuel coûte souvent 80 à 120 € par an et inclut la visite.",
+     "astuce": "Demandez si le déplacement est compris dans le prix annoncé."
+    },
+    {
+     "t": "Préparez les informations",
+     "x": "Marque et modèle (sur la plaque de la chaudière), date de la dernière visite, codes d'erreur ou bruits remarqués dans l'année.",
+     "img": "chaudiere"
+    },
+    {
+     "t": "Dégagez l'accès",
+     "x": "Libérez l'espace devant la chaudière et autour du conduit d'évacuation des fumées."
+    },
+    {
+     "t": "Pendant la visite",
+     "x": "Le professionnel nettoie le brûleur et le corps de chauffe, contrôle l'évacuation des fumées, les sécurités et la pression, et mesure le monoxyde de carbone. Comptez 45 minutes à 1 h 30."
+    },
+    {
+     "t": "Récupérez l'attestation",
+     "x": "Le professionnel doit vous la remettre. Gardez-la au moins 2 ans : votre assureur ou votre propriétaire peut la demander."
+    },
+    {
+     "t": "Notez la date de la prochaine visite",
+     "x": "Ajoutez un rappel dans votre téléphone pour l'année prochaine."
+    }
+   ],
+   "erreurs": [
+    "Sauter une année : en cas de sinistre, l'assurance peut réduire l'indemnisation.",
+    "Accepter une visite sans attestation.",
+    "Ouvrir le capot de la chaudière soi-même."
+   ],
+   "pro": [
+    "C'est toujours un professionnel qualifié qui fait l'entretien.",
+    "Maux de tête ou nausées près de la chaudière : sortez, aérez et appelez le 15 ou le 112."
+   ],
+   "sources": [
+    [
+     "Entretien d'une chaudière à gaz (Espace Aubade)",
+     "https://www.espace-aubade.fr/fiche-conseil/entretien-d-une-chaudiere-a-gaz.html"
+    ]
+   ]
+  },
+  {
+   "id": "daaf",
+   "e": "🔔",
+   "bg": "var(--red-50)",
+   "ill": "daaf",
+   "t": "Tester son détecteur de fumée",
+   "d": "Obligatoire dans chaque logement",
+   "min": 5,
+   "niveau": "Très facile",
+   "cout": "0 € (pile : 3 à 10 €)",
+   "pourquoi": "La nuit, on ne sent pas la fumée : le détecteur vous réveille à temps. Au moins un détecteur conforme à la norme NF EN 14604 est obligatoire dans chaque logement.",
+   "quand": "Testez-le une fois par mois, et à chaque changement d'heure par exemple, pour ne pas oublier.",
+   "secu": "Montez sur un escabeau stable, jamais sur une chaise. Prévenez la maison avant : l'alarme est très forte.",
+   "outils": [
+    "Escabeau",
+    "Pile neuve si besoin",
+    "Chiffon sec"
+   ],
+   "s": [
+    {
+     "t": "Appuyez sur le bouton test",
+     "x": "Maintenez-le 3 à 5 secondes : l'alarme doit sonner fort.",
+     "img": "daaf"
+    },
+    {
+     "t": "Pas de son ? Changez la pile",
+     "x": "Ouvrez le détecteur en le tournant, remplacez la pile, puis refaites le test.",
+     "astuce": "Les piles alcalines se changent chaque année ; les modèles lithium durent souvent 5 à 10 ans."
+    },
+    {
+     "t": "Toujours rien ? Remplacez l'appareil",
+     "x": "Un détecteur muet après une pile neuve est en panne. Choisissez-en un marqué NF EN 14604."
+    },
+    {
+     "t": "Dépoussiérez-le",
+     "x": "Passez un chiffon sec ou l'aspirateur sur les grilles : la poussière peut provoquer des fausses alertes ou l'empêcher de détecter."
+    },
+    {
+     "t": "Vérifiez la date de fin de vie",
+     "x": "Elle est inscrite au dos. Un détecteur se remplace à cette date, même s'il semble marcher."
+    },
+    {
+     "t": "Vérifiez l'emplacement",
+     "x": "Au plafond, au centre, dans le couloir qui dessert les chambres. Pas dans la cuisine ni la salle de bain (fausses alertes)."
+    }
+   ],
+   "erreurs": [
+    "Retirer la pile après une fausse alerte en cuisine, puis l'oublier.",
+    "Le peindre ou le couvrir.",
+    "L'installer près d'une fenêtre ou d'une bouche d'aération."
+   ],
+   "pro": [
+    "Un détecteur relié à une centrale ou à l'électricité de la maison : faites appel à un électricien."
+   ],
+   "sources": [
+    [
+     "Détecteur de fumée obligatoire (Groupama)",
+     "https://www.groupama.fr/assurance-habitation/conseils/detecteur-de-fumee-obligatoire/"
+    ]
+   ]
+  },
+  {
+   "id": "exterieur",
+   "e": "🚿",
+   "bg": "var(--sky-50)",
+   "ill": "exterieur",
+   "t": "Préparer le robinet extérieur pour l'hiver",
+   "d": "Éviter que le tuyau éclate avec le gel",
+   "min": 15,
+   "niveau": "Facile",
+   "cout": "5 à 15 € (isolant)",
+   "pourquoi": "L'eau restée dans le tuyau gèle, gonfle et fait éclater le robinet ou la canalisation. La fuite n'apparaît souvent qu'au dégel, parfois dans un mur.",
+   "quand": "Avant les premières gelées, en général fin octobre ou en novembre.",
+   "secu": "Repérez d'abord la bonne vanne : si vous fermez la vanne générale, toute la maison sera privée d'eau pendant l'opération.",
+   "outils": [
+    "Seau",
+    "Manchon ou housse isolante",
+    "Ruban adhésif"
+   ],
+   "s": [
+    {
+     "t": "Débranchez le tuyau d'arrosage",
+     "x": "Videz-le et rangez-le à l'abri : un tuyau resté branché garde l'eau dans le robinet."
+    },
+    {
+     "t": "Fermez la vanne intérieure",
+     "x": "C'est souvent un petit robinet sur le tuyau qui part vers le mur, à la cave, au garage ou sous l'évier. S'il n'y en a pas, la vanne générale fait l'affaire le temps de l'opération.",
+     "img": "exterieur"
+    },
+    {
+     "t": "Ouvrez le robinet extérieur",
+     "x": "Laissez l'eau s'écouler jusqu'à la dernière goutte dans le seau."
+    },
+    {
+     "t": "Ouvrez la purge si elle existe",
+     "x": "Certaines vannes ont une petite vis ou un bouchon de purge du côté du mur : ouvrez-le pour vider le reste d'eau, puis refermez."
+    },
+    {
+     "t": "Isolez le robinet",
+     "x": "Entourez le tuyau visible d'un manchon en mousse et couvrez le robinet d'une housse isolante. Scotchez les raccords.",
+     "astuce": "Évitez le chiffon ou le papier journal : ils prennent l'humidité et gèlent eux aussi."
+    },
+    {
+     "t": "Au printemps",
+     "x": "Retirez l'isolant, fermez le robinet extérieur puis rouvrez doucement la vanne intérieure. Vérifiez qu'aucune fuite n'apparaît."
+    }
+   ],
+   "erreurs": [
+    "Couper l'eau sans vider le tuyau : l'eau reste dedans et gèle.",
+    "Laisser le tuyau d'arrosage branché.",
+    "Isoler avec de la laine de verre exposée à la pluie."
+   ],
+   "pro": [
+    "Une fuite ou une tache d'humidité apparaît au dégel.",
+    "Vous ne trouvez aucune vanne pour isoler le robinet : un plombier peut en poser une."
+   ],
+   "sources": [
+    [
+     "Robinet extérieur et gel (MesDépanneurs)",
+     "https://www.mesdepanneurs.fr/blog/robinet-exterieur-gel-hiver"
+    ]
+   ]
+  },
+  {
+   "id": "gouttieres",
+   "e": "🍂",
+   "bg": "var(--sun-50)",
+   "ill": "gouttiere",
+   "t": "Nettoyer les gouttières",
+   "d": "Après la chute des feuilles",
+   "min": 60,
+   "niveau": "Prudence : pro si étage",
+   "cout": "0 € soi-même",
+   "pourquoi": "Des gouttières bouchées débordent : l'eau coule le long des murs, crée de l'humidité et peut abîmer la toiture et les fondations.",
+   "quand": "Deux fois par an : fin d'automne quand les arbres ont perdu leurs feuilles, et au printemps.",
+   "secu": "Les chutes d'échelle sont graves. Ne le faites jamais seul, ni par temps de pluie, de gel ou de vent. Au-delà du rez-de-chaussée, faites appel à un professionnel.",
+   "outils": [
+    "Échelle stable avec écarteur",
+    "Gants épais",
+    "Petite pelle ou main",
+    "Seau avec crochet",
+    "Tuyau d'arrosage"
+   ],
+   "s": [
+    {
+     "t": "Installez l'échelle correctement",
+     "x": "Sur un sol plat et dur. Utilisez un écarteur pour qu'elle ne s'appuie pas sur la gouttière. Une personne tient le pied pendant toute l'opération.",
+     "img": "gouttiere"
+    },
+    {
+     "t": "Montez équipé",
+     "x": "Gants épais, chaussures qui ne glissent pas. Gardez toujours une main sur l'échelle et ne vous penchez pas : déplacez l'échelle."
+    },
+    {
+     "t": "Retirez feuilles et mousse",
+     "x": "À la main ou avec une petite pelle, en remplissant le seau accroché à l'échelle."
+    },
+    {
+     "t": "Dégagez la crapaudine",
+     "x": "C'est la petite grille en haut du tuyau de descente. Retirez-la doucement et nettoyez-la."
+    },
+    {
+     "t": "Rincez au jet",
+     "x": "Faites couler l'eau depuis l'extrémité opposée à la descente : elle doit s'écouler rapidement."
+    },
+    {
+     "t": "Vérifiez les fuites",
+     "x": "Regardez les raccords et les crochets. Une gouttière qui pend ou qui goutte doit être réparée."
+    }
+   ],
+   "erreurs": [
+    "Monter seul.",
+    "Appuyer l'échelle directement sur la gouttière.",
+    "Se pencher pour gagner quelques centimètres."
+   ],
+   "pro": [
+    "Maison à étage ou toit en pente forte.",
+    "Câbles électriques à proximité.",
+    "Gouttière abîmée ou décrochée."
+   ],
+   "sources": [
+    [
+     "Nettoyer les gouttières en sécurité (Allianz)",
+     "https://www.allianz.fr/assurance-particulier/habitation-biens/assurance-habitation/conseils-pratiques/nettoyer-les-gouttieres.html"
+    ]
+   ]
+  },
+  {
+   "id": "aerer",
+   "e": "🪟",
+   "bg": "var(--sky-50)",
+   "ill": "aerer",
+   "t": "Bien aérer en hiver",
+   "d": "Air sain sans gaspiller le chauffage",
+   "min": 10,
+   "niveau": "Très facile",
+   "cout": "0 €",
+   "pourquoi": "L'air intérieur se charge d'humidité (douches, cuisine, respiration) et de polluants. Sans aération, la buée et les moisissures apparaissent, et l'air devient plus difficile à chauffer.",
+   "quand": "Tous les jours, même quand il fait froid : 5 à 10 minutes, idéalement le matin et le soir.",
+   "secu": "Ne bouchez jamais les grilles d'aération ni les bouches de ventilation, surtout dans une pièce avec une chaudière ou un chauffe-eau au gaz.",
+   "outils": [
+    "Rien de spécial"
+   ],
+   "s": [
+    {
+     "t": "Baissez les radiateurs de la pièce",
+     "x": "Le temps d'aérer, pour ne pas chauffer l'extérieur."
+    },
+    {
+     "t": "Ouvrez grand",
+     "x": "Fenêtre grande ouverte plutôt qu'entrouverte : l'air se renouvelle vite et les murs n'ont pas le temps de refroidir.",
+     "img": "aerer"
+    },
+    {
+     "t": "Créez un courant d'air",
+     "x": "Si possible, ouvrez deux fenêtres opposées : 5 minutes suffisent alors."
+    },
+    {
+     "t": "Refermez et remettez le chauffage",
+     "x": "Un air neuf et sec se réchauffe plus vite qu'un air humide."
+    },
+    {
+     "t": "Aérez après la douche et la cuisine",
+     "x": "Laissez la porte de la salle de bain fermée et la fenêtre ou la ventilation en marche quelques minutes."
+    },
+    {
+     "t": "Vérifiez les entrées d'air",
+     "x": "Les petites grilles en haut des fenêtres doivent rester ouvertes et propres."
+    }
+   ],
+   "erreurs": [
+    "Laisser une fenêtre entrouverte toute la journée : on refroidit les murs.",
+    "Boucher les grilles pour éviter les courants d'air.",
+    "Faire sécher le linge sans aérer."
+   ],
+   "pro": [
+    "Moisissures qui reviennent malgré l'aération : faites vérifier la ventilation (VMC)."
+   ],
+   "sources": []
+  },
+  {
+   "id": "gel",
+   "e": "❄️",
+   "bg": "var(--lilac-50)",
+   "ill": "gel",
+   "t": "Protéger les tuyaux du gel",
+   "d": "Garage, cave, vide sanitaire, compteur",
+   "min": 30,
+   "niveau": "Facile",
+   "cout": "2 à 5 € le mètre d'isolant",
+   "pourquoi": "Un tuyau qui gèle peut se fissurer ou éclater. Le dégât des eaux apparaît au dégel, parfois quand vous êtes absent.",
+   "quand": "Avant l'hiver, puis dès qu'une vague de froid est annoncée.",
+   "secu": "Ne réchauffez jamais un tuyau gelé avec une flamme (chalumeau, briquet) : risque d'incendie et d'éclatement.",
+   "outils": [
+    "Manchons isolants en mousse",
+    "Ruban adhésif",
+    "Cutter",
+    "Mètre"
+   ],
+   "s": [
+    {
+     "t": "Repérez les tuyaux exposés",
+     "x": "Garage, cave, combles, vide sanitaire, murs extérieurs, et le compteur d'eau s'il est dans un regard dehors."
+    },
+    {
+     "t": "Mesurez le diamètre",
+     "x": "Les manchons existent pour chaque taille de tuyau : prenez la bonne pour qu'ils serrent bien."
+    },
+    {
+     "t": "Posez les manchons",
+     "x": "Ils sont fendus sur la longueur : ouvrez, posez sur le tuyau, refermez. Scotchez les jonctions.",
+     "img": "gel"
+    },
+    {
+     "t": "Protégez le compteur",
+     "x": "Isolez-le avec une plaque de polystyrène ou une housse spéciale, jamais avec un tissu qui prend l'eau."
+    },
+    {
+     "t": "Par grand froid",
+     "x": "Gardez au moins 12 à 14 °C dans les pièces où passent des tuyaux. Si vous partez, laissez le chauffage en mode hors-gel."
+    },
+    {
+     "t": "Si un tuyau a gelé",
+     "x": "Coupez l'eau, ouvrez le robinet concerné et réchauffez doucement le tuyau avec un sèche-cheveux, en commençant côté robinet."
+    }
+   ],
+   "erreurs": [
+    "Isoler avec du papier journal ou des chiffons.",
+    "Couper complètement le chauffage pendant une absence en hiver.",
+    "Utiliser une flamme pour dégeler."
+   ],
+   "pro": [
+    "Le tuyau est fissuré ou fuit après le dégel.",
+    "L'eau ne revient pas après réchauffage."
+   ],
+   "sources": [
+    [
+     "Protéger ses canalisations contre le froid (MAIF)",
+     "https://www.maif.fr/conseils-prevention/la-vie-quotidienne/maison/proteger-ses-canalisations-contre-le-froid"
+    ]
+   ]
+  },
+  {
+   "id": "vmc",
+   "e": "🌀",
+   "bg": "var(--mint-50)",
+   "ill": "vmc",
+   "t": "Nettoyer les bouches de VMC",
+   "d": "Cuisine, salle de bain, WC",
+   "min": 20,
+   "niveau": "Facile",
+   "cout": "0 €",
+   "pourquoi": "Encrassées, les bouches aspirent moins bien : l'humidité stagne, la buée et les moisissures apparaissent, et le moteur force.",
+   "quand": "Environ tous les trois mois. Un professionnel contrôle l'installation complète tous les trois ans environ.",
+   "secu": "Coupez la VMC au tableau électrique avant de démonter les bouches.",
+   "outils": [
+    "Escabeau",
+    "Bassine d'eau tiède savonneuse",
+    "Éponge douce",
+    "Aspirateur avec embout brosse"
+   ],
+   "s": [
+    {
+     "t": "Coupez la VMC",
+     "x": "Au tableau électrique, sur le disjoncteur noté VMC."
+    },
+    {
+     "t": "Démontez la bouche",
+     "x": "Tirez-la doucement vers vous ou tournez-la selon le modèle. Ne tirez pas sur la gaine derrière.",
+     "astuce": "Prenez une photo avant : vous remonterez sans dérégler l'ouverture."
+    },
+    {
+     "t": "Lavez-la",
+     "x": "Trempez-la dans l'eau tiède savonneuse, frottez avec l'éponge, rincez.",
+     "img": "vmc"
+    },
+    {
+     "t": "Laissez sécher",
+     "x": "Elle doit être complètement sèche avant d'être remise."
+    },
+    {
+     "t": "Dépoussiérez les entrées d'air",
+     "x": "Les grilles en haut des fenêtres s'aspirent simplement. Si elles sont « hygroréglables », nettoyez-les uniquement à sec."
+    },
+    {
+     "t": "Remontez et rallumez",
+     "x": "Remettez chaque bouche à sa place (celle de la cuisine n'est pas la même que celle des WC), puis remettez le courant."
+    }
+   ],
+   "erreurs": [
+    "Laver une bouche hygroréglable à l'eau.",
+    "Échanger les bouches entre les pièces.",
+    "Boucher une bouche parce qu'elle fait du bruit."
+   ],
+   "pro": [
+    "La VMC ne tourne plus ou fait un bruit anormal.",
+    "Aucune aspiration malgré des bouches propres (gaine ou moteur)."
+   ],
+   "sources": [
+    [
+     "Entretien et nettoyage de la VMC (TotalEnergies)",
+     "https://www.totalenergies.fr/particuliers/parlons-energie/dossiers-energie/chauffage-et-climatisation/entretien-et-nettoyage-de-la-vmc"
+    ]
+   ]
+  },
+  {
+   "id": "mousseur",
+   "e": "💧",
+   "bg": "var(--sky-50)",
+   "ill": "mousseur",
+   "t": "Détartrer un robinet",
+   "d": "Jet faible ou qui éclabousse",
+   "min": 70,
+   "niveau": "Très facile",
+   "cout": "1 € de vinaigre",
+   "pourquoi": "Le calcaire bouche les petites grilles au bout du robinet, le mousseur. Le jet devient faible ou part de travers.",
+   "quand": "Au printemps, ou dès que le jet faiblit. Plus souvent si votre eau est très calcaire.",
+   "secu": "Si vous utilisez une pince, protégez le robinet avec un chiffon pour ne pas le rayer.",
+   "outils": [
+    "Vinaigre blanc",
+    "Petit bol",
+    "Vieille brosse à dents",
+    "Chiffon"
+   ],
+   "s": [
+    {
+     "t": "Fermez le robinet",
+     "x": "Posez un chiffon au fond de l'évier pour ne pas perdre les petites pièces."
+    },
+    {
+     "t": "Dévissez le mousseur",
+     "x": "À la main, dans le sens inverse des aiguilles d'une montre. S'il résiste, utilisez une pince avec un chiffon.",
+     "img": "mousseur"
+    },
+    {
+     "t": "Faites-le tremper",
+     "x": "Une heure dans du vinaigre blanc pur. Pour un calcaire épais, laissez toute une nuit."
+    },
+    {
+     "t": "Brossez les grilles",
+     "x": "Avec la brosse à dents, puis rincez à l'eau claire."
+    },
+    {
+     "t": "Revissez à la main",
+     "x": "Sans forcer. Ouvrez l'eau : le jet doit être régulier."
+    }
+   ],
+   "erreurs": [
+    "Oublier l'ordre des petites pièces : prenez-les en photo.",
+    "Serrer avec une pince sans protection."
+   ],
+   "pro": [
+    "Le robinet fuit ou goutte même fermé : le joint ou la cartouche est usé."
+   ],
+   "sources": []
+  },
+  {
+   "id": "lv",
+   "e": "🍽️",
+   "bg": "var(--mint-50)",
+   "ill": "lv",
+   "t": "Nettoyer le filtre du lave-vaisselle",
+   "d": "Vaisselle mal lavée, mauvaise odeur",
+   "min": 10,
+   "niveau": "Très facile",
+   "cout": "0 €",
+   "pourquoi": "Les restes de nourriture s'accumulent dans le filtre : l'eau circule moins bien, la vaisselle ressort sale et la machine sent mauvais.",
+   "quand": "Une fois par mois environ, ou dès qu'une odeur apparaît.",
+   "secu": "Machine éteinte et refroidie.",
+   "outils": [
+    "Brosse ou vieille brosse à dents",
+    "Eau chaude",
+    "Liquide vaisselle"
+   ],
+   "s": [
+    {
+     "t": "Retirez le panier du bas",
+     "x": "Faites-le glisser vers vous jusqu'à le sortir."
+    },
+    {
+     "t": "Dévissez le filtre",
+     "x": "Au fond de la cuve, il tourne en général d'un quart de tour vers la gauche, puis se soulève.",
+     "img": "lv"
+    },
+    {
+     "t": "Lavez-le",
+     "x": "Sous l'eau chaude avec un peu de liquide vaisselle, en brossant la grille fine."
+    },
+    {
+     "t": "Remettez-le bien verrouillé",
+     "x": "Tournez jusqu'au clic ou à la butée : mal remis, il laisse passer des débris vers la pompe."
+    },
+    {
+     "t": "Lancez un cycle à vide",
+     "x": "Un programme chaud avec un verre de vinaigre blanc posé dans le panier du haut, une fois par mois, enlève graisses et odeurs."
+    }
+   ],
+   "erreurs": [
+    "Oublier de reverrouiller le filtre.",
+    "Mettre du vinaigre dans le bac à produit de rinçage à la place du liquide de rinçage."
+   ],
+   "pro": [
+    "La machine ne vidange plus du tout malgré un filtre propre.",
+    "Code d'erreur qui revient."
+   ],
+   "sources": []
+  },
+  {
+   "id": "ll",
+   "e": "🧺",
+   "bg": "var(--lilac-50)",
+   "ill": "ll",
+   "t": "Vider le filtre du lave-linge",
+   "d": "La machine ne vidange plus",
+   "min": 20,
+   "niveau": "Facile",
+   "cout": "0 €",
+   "pourquoi": "Pièces, élastiques et peluches bloquent le filtre de la pompe : l'eau reste dans le tambour et la machine se met en erreur.",
+   "quand": "Tous les deux ou trois mois, ou dès que l'eau reste dans le tambour.",
+   "secu": "Débranchez la machine. Si un programme vient de finir, attendez que l'eau refroidisse.",
+   "outils": [
+    "Serviettes",
+    "Plat bas (plaque à four)",
+    "Seau"
+   ],
+   "s": [
+    {
+     "t": "Débranchez la machine",
+     "x": "La prise, pas seulement le bouton marche."
+    },
+    {
+     "t": "Ouvrez la trappe",
+     "x": "En bas, à l'avant, souvent à droite. Elle s'ouvre avec le doigt ou une pièce de monnaie.",
+     "img": "ll"
+    },
+    {
+     "t": "Préparez de quoi récupérer l'eau",
+     "x": "Serviettes au sol et plat bas devant la trappe : il peut sortir plusieurs litres."
+    },
+    {
+     "t": "Videz par le petit tuyau",
+     "x": "S'il y en a un, sortez-le, retirez son bouchon au-dessus du plat, et laissez couler. Remettez le bouchon pour vider le plat."
+    },
+    {
+     "t": "Dévissez le filtre lentement",
+     "x": "Vers la gauche, petit à petit : l'eau restante va couler."
+    },
+    {
+     "t": "Nettoyez et revissez bien serré",
+     "x": "Retirez ce qui le bouche, rincez, revissez à fond. Lancez un rinçage pour vérifier qu'il n'y a pas de fuite."
+    }
+   ],
+   "erreurs": [
+    "Ouvrir d'un coup : inondation garantie.",
+    "Revisser le filtre de travers : fuite au prochain lavage."
+   ],
+   "pro": [
+    "La pompe ne fait aucun bruit pendant la vidange.",
+    "La machine fuit après avoir revissé le filtre correctement."
+   ],
+   "sources": []
+  },
+  {
+   "id": "joints",
+   "e": "🛁",
+   "bg": "var(--mint-50)",
+   "ill": "joint",
+   "t": "Entretenir les joints de la douche",
+   "d": "Joints noircis ou décollés",
+   "min": 40,
+   "niveau": "Facile",
+   "cout": "8 à 15 € (silicone sanitaire)",
+   "pourquoi": "Un joint abîmé laisse passer l'eau derrière la baignoire ou le bac : dégâts dans le mur, chez le voisin du dessous, et moisissures.",
+   "quand": "Vérifiez-les chaque été. Refaites un joint qui noircit en profondeur ou qui se décolle.",
+   "secu": "Aérez pendant le nettoyage et ne mélangez jamais vinaigre et eau de Javel.",
+   "outils": [
+    "Vinaigre blanc ou bicarbonate",
+    "Cutter",
+    "Ruban de masquage",
+    "Cartouche de silicone sanitaire anti-moisissures",
+    "Pistolet à silicone"
+   ],
+   "s": [
+    {
+     "t": "Nettoyez d'abord",
+     "x": "Frottez avec du bicarbonate humide ou du vinaigre blanc, rincez. Si le joint redevient blanc et reste bien collé, c'est fini !"
+    },
+    {
+     "t": "Retirez l'ancien joint s'il est abîmé",
+     "x": "Coupez-le au cutter le long du carrelage et de la baignoire, puis tirez-le. Grattez les restes."
+    },
+    {
+     "t": "Nettoyez et séchez",
+     "x": "Dégraissez à l'alcool ménager. Laissez sécher 24 h : le silicone ne colle pas sur une surface humide.",
+     "astuce": "Remplissez la baignoire d'eau avant de poser le joint : son poids écarte légèrement le joint, qui ne se fendra pas ensuite."
+    },
+    {
+     "t": "Posez du ruban de masquage",
+     "x": "De chaque côté, à 3 ou 4 mm du coin : le joint sera droit."
+    },
+    {
+     "t": "Appliquez le silicone",
+     "x": "En un seul geste régulier, sans vous arrêter."
+    },
+    {
+     "t": "Lissez au doigt",
+     "x": "Doigt mouillé d'eau savonneuse, d'un bout à l'autre. Retirez le ruban tout de suite.",
+     "img": "joint"
+    },
+    {
+     "t": "Laissez sécher",
+     "x": "Pas de douche pendant 24 h."
+    }
+   ],
+   "erreurs": [
+    "Poser le silicone sur l'ancien joint.",
+    "Utiliser du silicone ordinaire au lieu de silicone sanitaire.",
+    "Prendre une douche trop tôt."
+   ],
+   "pro": [
+    "Le carrelage sonne creux ou se décolle : l'eau est peut-être passée derrière.",
+    "Trace d'humidité au plafond du dessous."
+   ],
+   "sources": []
+  },
+  {
+   "id": "frigo",
+   "e": "🧊",
+   "bg": "var(--sky-50)",
+   "ill": "frigo",
+   "t": "Dépoussiérer l'arrière du frigo",
+   "d": "Il consomme moins et dure plus",
+   "min": 20,
+   "niveau": "Très facile",
+   "cout": "0 €",
+   "pourquoi": "La grille noire à l'arrière évacue la chaleur. Couverte de poussière, elle chauffe : le réfrigérateur tourne plus longtemps et consomme davantage.",
+   "quand": "Une à deux fois par an, avant l'été.",
+   "secu": "Débranchez l'appareil. Faites-vous aider pour l'écarter du mur : il est lourd.",
+   "outils": [
+    "Aspirateur avec brosse",
+    "Pinceau souple",
+    "Chiffon"
+   ],
+   "s": [
+    {
+     "t": "Débranchez",
+     "x": "Le contenu ne craint rien pour 20 minutes si vous gardez les portes fermées."
+    },
+    {
+     "t": "Écartez du mur",
+     "x": "Tirez doucement, en le soulevant légèrement si besoin, sans abîmer le sol ni le tuyau d'eau s'il y en a un."
+    },
+    {
+     "t": "Aspirez la grille",
+     "x": "Avec la brosse de l'aspirateur, de haut en bas. Le pinceau aide entre les tubes.",
+     "img": "frigo"
+    },
+    {
+     "t": "Testez le joint de porte",
+     "x": "Coincez une feuille de papier dans la porte fermée : si elle glisse sans résistance, le joint ne serre plus."
+    },
+    {
+     "t": "Replacez avec de l'espace",
+     "x": "Laissez 5 à 10 cm entre l'arrière et le mur pour que l'air circule, puis rebranchez."
+    }
+   ],
+   "erreurs": [
+    "Mouiller la grille ou le moteur.",
+    "Coller l'appareil contre le mur ou entre deux meubles sans ventilation."
+   ],
+   "pro": [
+    "Le frigo ne refroidit plus malgré une grille propre.",
+    "Bruit fort et continu du moteur."
+   ],
+   "sources": []
+  },
+  {
+   "id": "eau",
+   "e": "🚰",
+   "bg": "var(--sky-50)",
+   "ill": "vanne",
+   "t": "Couper l'eau de la maison",
+   "d": "Le réflexe en cas de fuite",
+   "min": 3,
+   "niveau": "Très facile",
+   "cout": "0 €",
+   "pourquoi": "Savoir couper l'eau en 30 secondes limite les dégâts d'une fuite en attendant le plombier.",
+   "quand": "Repérez le robinet dès maintenant, avant d'en avoir besoin. Manœuvrez-le une fois par an pour qu'il ne se bloque pas.",
+   "secu": "Gardez une lampe de poche près du robinet si l'endroit est sombre.",
+   "outils": [
+    "Lampe de poche"
+   ],
+   "s": [
+    {
+     "t": "Trouvez le robinet d'arrêt général",
+     "x": "Près du compteur d'eau, sous l'évier de la cuisine, à la cave, au garage ou dans le placard technique. En appartement, il peut être sur le palier."
+    },
+    {
+     "t": "Fermez-le",
+     "x": "Robinet à poignée ronde : tournez dans le sens des aiguilles d'une montre jusqu'à la butée. Vanne à levier : un quart de tour, le levier se met en travers du tuyau.",
+     "img": "vanne"
+    },
+    {
+     "t": "Vérifiez",
+     "x": "Ouvrez un robinet : l'eau doit s'arrêter après quelques secondes."
+    },
+    {
+     "t": "Pour remettre l'eau",
+     "x": "Rouvrez doucement, puis laissez couler un robinet pour chasser l'air."
+    }
+   ],
+   "erreurs": [
+    "Forcer sur un vieux robinet grippé : il peut casser.",
+    "Chercher le robinet le jour de la fuite."
+   ],
+   "pro": [
+    "Le robinet d'arrêt est bloqué ou fuit lui-même."
+   ],
+   "sources": []
+  },
+  {
+   "id": "disj",
+   "e": "⚡",
+   "bg": "var(--sun-50)",
+   "ill": "tableau",
+   "t": "Réarmer un disjoncteur",
+   "d": "Une partie de la maison n'a plus de courant",
+   "min": 5,
+   "niveau": "Facile",
+   "cout": "0 €",
+   "pourquoi": "Un disjoncteur coupe le courant quand un appareil ou un circuit pose problème. Le réarmer correctement permet de trouver l'appareil en cause.",
+   "quand": "Dès qu'une pièce ou un groupe de prises n'a plus de courant.",
+   "secu": "Mains sèches, pieds au sec. Ne touchez que les manettes, jamais l'intérieur du tableau ni les fils.",
+   "outils": [
+    "Lampe de poche"
+   ],
+   "s": [
+    {
+     "t": "Ouvrez le tableau électrique",
+     "x": "Repérez la manette tombée en position basse.",
+     "img": "tableau"
+    },
+    {
+     "t": "Débranchez les appareils concernés",
+     "x": "Ceux de la pièce sans courant."
+    },
+    {
+     "t": "Remontez la manette",
+     "x": "D'un geste franc, jusqu'au bout."
+    },
+    {
+     "t": "Rebranchez un par un",
+     "x": "Celui qui fait tout sauter est en cause : laissez-le débranché et faites-le vérifier."
+    },
+    {
+     "t": "Si ça saute sans rien de branché",
+     "x": "N'insistez pas : le problème vient de l'installation. Appelez un électricien."
+    }
+   ],
+   "erreurs": [
+    "Remonter la manette en boucle.",
+    "Maintenir la manette en position haute de force."
+   ],
+   "pro": [
+    "Odeur de brûlé, tableau chaud ou grésillement : coupez le général et appelez un électricien.",
+    "Le disjoncteur saute plusieurs fois par semaine."
+   ],
+   "sources": []
+  },
+  {
+   "id": "evier",
+   "e": "🫧",
+   "bg": "var(--mint-50)",
+   "ill": "siphon",
+   "t": "Déboucher un évier sans produit",
+   "d": "L'eau s'évacue lentement",
+   "min": 30,
+   "niveau": "Facile",
+   "cout": "0 à 10 €",
+   "pourquoi": "Graisses, cheveux et restes d'aliments s'accumulent dans le siphon. Les déboucheurs chimiques sont agressifs pour les tuyaux et dangereux pour la peau.",
+   "quand": "Dès que l'eau descend lentement, avant que ce soit complètement bouché.",
+   "secu": "Ne mélangez jamais les produits. Si vous avez déjà versé un déboucheur chimique, portez des gants et des lunettes.",
+   "outils": [
+    "Ventouse",
+    "Bicarbonate et vinaigre blanc",
+    "Seau",
+    "Gants"
+   ],
+   "s": [
+    {
+     "t": "Videz l'eau stagnante",
+     "x": "Avec un verre, dans un seau."
+    },
+    {
+     "t": "Ventouse",
+     "x": "Bouchez le trop-plein avec un chiffon humide, posez la ventouse sur la bonde et pompez une dizaine de fois."
+    },
+    {
+     "t": "Bicarbonate et vinaigre",
+     "x": "3 cuillères de bicarbonate, puis un verre de vinaigre blanc. Laissez mousser 30 minutes."
+    },
+    {
+     "t": "Eau très chaude",
+     "x": "Versez une casserole d'eau très chaude, mais pas bouillante, pour ne pas abîmer les tuyaux en PVC."
+    },
+    {
+     "t": "Démontez le siphon",
+     "x": "Seau dessous, dévissez les écrous à la main, videz et nettoyez le siphon, puis revissez bien.",
+     "img": "siphon"
+    }
+   ],
+   "erreurs": [
+    "Verser de l'eau bouillante dans des tuyaux en PVC.",
+    "Mélanger vinaigre et eau de Javel ou déboucheur."
+   ],
+   "pro": [
+    "Plusieurs évacuations sont bouchées en même temps : le problème est plus loin dans la canalisation."
+   ],
+   "sources": []
+  },
+  {
+   "id": "porte",
+   "e": "🚪",
+   "bg": "var(--sun-50)",
+   "ill": "porte",
+   "t": "Porte qui frotte",
+   "d": "Elle racle le sol ou le cadre",
+   "min": 20,
+   "niveau": "Facile",
+   "cout": "0 à 5 €",
+   "pourquoi": "Avec le temps, les vis des charnières se desserrent et la porte s'affaisse : elle frotte et s'use.",
+   "quand": "Dès qu'elle frotte, avant que le bois ou le sol ne s'abîment.",
+   "secu": "Faites-vous aider pour tenir la porte si vous devez la soulever ou la dégonder.",
+   "outils": [
+    "Tournevis adapté",
+    "Chevilles en bois et colle à bois (si une vis tourne dans le vide)"
+   ],
+   "s": [
+    {
+     "t": "Repérez où elle frotte",
+     "x": "Marques sur le sol ou sur le cadre."
+    },
+    {
+     "t": "Resserrez les charnières",
+     "x": "Toutes les vis, surtout celles de la charnière du haut, côté cadre.",
+     "img": "porte"
+    },
+    {
+     "t": "Vis qui tourne dans le vide",
+     "x": "Retirez-la, collez une cheville en bois dans le trou, laissez sécher, puis revissez."
+    },
+    {
+     "t": "Vérifiez",
+     "x": "Ouvrez et fermez plusieurs fois."
+    }
+   ],
+   "erreurs": [
+    "Raboter avant d'avoir resserré les charnières."
+   ],
+   "pro": [
+    "La porte frotte toujours : un menuisier pourra la raboter ou régler les paumelles."
+   ],
+   "sources": []
+  }
+ ],
+ "seasons": {
+  "automne": {
+   "n": "Cet automne",
+   "bg": "linear-gradient(135deg,#ffe9df,#fff6d9)",
+   "items": [
+    [
+     "Purger les radiateurs",
+     "radiateur"
+    ],
+    [
+     "Faire l'entretien annuel de la chaudière",
+     "chaudiere",
+     "pro"
+    ],
+    [
+     "Tester les détecteurs de fumée",
+     "daaf"
+    ],
+    [
+     "Préparer le robinet extérieur pour le gel",
+     "exterieur"
+    ],
+    [
+     "Nettoyer les gouttières",
+     "gouttieres",
+     "pro si étage"
+    ]
+   ]
+  },
+  "hiver": {
+   "n": "Cet hiver",
+   "bg": "linear-gradient(135deg,#e4edff,#eee9ff)",
+   "items": [
+    [
+     "Aérer 5 à 10 minutes matin et soir",
+     "aerer"
+    ],
+    [
+     "Protéger les tuyaux du gel",
+     "gel"
+    ],
+    [
+     "Purger les radiateurs qui chauffent mal",
+     "radiateur"
+    ],
+    [
+     "Tester les détecteurs de fumée",
+     "daaf"
+    ]
+   ]
+  },
+  "printemps": {
+   "n": "Ce printemps",
+   "bg": "linear-gradient(135deg,#ddf6f1,#e4edff)",
+   "items": [
+    [
+     "Détartrer les robinets",
+     "mousseur"
+    ],
+    [
+     "Nettoyer les bouches de VMC",
+     "vmc"
+    ],
+    [
+     "Nettoyer le filtre du lave-vaisselle",
+     "lv"
+    ],
+    [
+     "Nettoyer les gouttières",
+     "gouttieres",
+     "pro si étage"
+    ]
+   ]
+  },
+  "ete": {
+   "n": "Cet été",
+   "bg": "linear-gradient(135deg,#fff6d9,#ddf6f1)",
+   "items": [
+    [
+     "Vérifier les joints de la douche",
+     "joints"
+    ],
+    [
+     "Dépoussiérer l'arrière du frigo",
+     "frigo"
+    ],
+    [
+     "Vider le filtre du lave-linge",
+     "ll"
+    ],
+    [
+     "Tester les détecteurs de fumée",
+     "daaf"
+    ]
+   ]
+  }
+ }
+}

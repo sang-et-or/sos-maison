@@ -19,6 +19,7 @@ function sniff(b: Uint8Array): "image/jpeg" | "image/png" | "image/webp" | null 
 export async function POST(req: Request) {
   try {
     const user = await requireUser();
+    if (!process.env.ANTHROPIC_API_KEY) throw new HttpError(503, "L'analyse des photos n'est pas encore activée sur ce site.", "ai_disabled");
     const form = await req.formData();
     const file = form.get("file");
     if (!(file instanceof File)) throw new HttpError(400, "Aucune photo reçue.");

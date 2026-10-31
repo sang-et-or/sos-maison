@@ -19,6 +19,8 @@ jobs:
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/sos_maison
       APP_URL: http://localhost:3000
+      ADMIN_EMAILS: admin-smoke@example.fr
+      STRIPE_WEBHOOK_SECRET: whsec_smoke_test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

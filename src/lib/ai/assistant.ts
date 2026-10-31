@@ -93,7 +93,8 @@ export async function* runAssistant(opts: {
 }): AsyncGenerator<AssistantEvent> {
   const messages: Anthropic.MessageParam[] = opts.turns.map((t) => ({ role: t.role, content: t.content }));
   const sources: SearchResult[] = [];
-  const canSearch = tutorialAllowed(opts.risk) || opts.risk === 2;
+  // Sans clé Brave, l'outil n'est pas proposé (aucun crédit débité pour une recherche impossible).
+  const canSearch = Boolean(process.env.BRAVE_API_KEY) && (tutorialAllowed(opts.risk) || opts.risk === 2);
   // Fiche pas à pas : seulement quand un tutoriel est autorisé (niveau 0 ou 1).
   const canCard = tutorialAllowed(opts.risk);
   let searches = 0;

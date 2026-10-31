@@ -92,6 +92,12 @@ export async function requireUser(): Promise<User> {
   return u;
 }
 
+export async function requireAdmin(): Promise<User> {
+  const u = await requireUser();
+  if (u.role !== "admin") throw new HttpError(403, "Accès réservé à l'administration");
+  return u;
+}
+
 export async function logout() {
   const jar = await cookies();
   const sid = jar.get(SESSION_COOKIE)?.value;

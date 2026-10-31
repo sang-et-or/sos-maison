@@ -1,5 +1,7 @@
 import { currentUser } from "@/lib/auth";
+import Link from "next/link";
 import { Starter } from "@/components/Starter";
+import { SEASONS, seasonOf, guideById } from "@/lib/guides";
 
 const STEPS = [
   { t: "Vous décrivez ou montrez", d: "Pas besoin de connaître le nom des pièces.", c: "bg-sky-50 text-sky" },
@@ -9,6 +11,7 @@ const STEPS = [
 
 export default async function Home() {
   const user = await currentUser().catch(() => null);
+  const season = SEASONS[seasonOf()];
   return (
     <div className="space-y-6 pt-3">
       <Starter loggedIn={Boolean(user)} />
@@ -26,6 +29,27 @@ export default async function Home() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="space-y-2.5 rounded-[1.8rem] p-4" style={{ background: season.bg }}>
+        <div className="flex items-center justify-between">
+          <h2 className="section-title">{season.n}</h2>
+          <Link href="/guides" className="text-sm font-bold underline">Tous les guides</Link>
+        </div>
+        <ul className="-mx-4 flex gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+          {season.items.map(([label, id]) => {
+            const g = guideById(id);
+            return (
+              <li key={label} className="w-40 shrink-0">
+                <Link href={`/guides/${id}`} className="flex h-full flex-col gap-1.5 rounded-3xl bg-white p-3">
+                  <span className="text-2xl" aria-hidden>{g?.e}</span>
+                  <b className="text-[0.95rem] leading-tight">{label}</b>
+                  {g && <small className="text-muted">{g.min} min</small>}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </section>
 
       <section className="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-3xl bg-danger-600 px-4 py-3.5 text-white">

@@ -1,38 +1,50 @@
-# SOS Maison — version 0.3
+# SOS Maison — version 0.4
 
-Assistant de dépannage domestique avec Toit-Toit, la mascotte : conversation avec l'IA, photos, dictée,
-fiches de réparation à cocher, tutoriels vérifiés, sécurité renforcée, comptes sans mot de passe,
-annuaire d'artisans avec demande d'intervention, application installable.
+[![Déployer sur Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsang-et-or%2Fsos-maison&project-name=sos-maison&env=DATABASE_URL,ANTHROPIC_API_KEY,RESEND_API_KEY,EMAIL_FROM,ADMIN_EMAILS,CRON_SECRET,APP_URL&envLink=https%3A%2F%2Fgithub.com%2Fsang-et-or%2Fsos-maison%2Fblob%2Fmain%2Fdocs%2FMISE-EN-LIGNE.md)
+
+Assistant de dépannage domestique avec Toit-Toit, la mascotte : conversation avec l'IA, photos, caméra en direct,
+voix (dictée, lecture des réponses, mode mains libres), fiches de réparation à cocher, tutoriels vérifiés, guides
+d'entretien illustrés, sécurité renforcée, comptes sans mot de passe, annuaire et espace artisan, abonnement Premium,
+administration, application installable.
+
+**Mise en ligne : suivez [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md)** (45 minutes, aucune ligne de commande).
 
 ## Ce qui est livré
 
-| Fonction | État |
+Chaque envoi sur GitHub compile le site et lance tous les tests (onglet *Actions*) : types, tests unitaires,
+tests de la base PostgreSQL 16, compilation, puis un parcours de bout en bout sur le site démarré.
+
+| Fonction | Vérification automatique |
 | --- | --- |
-| Base de données (19 tables + fiches de réparation, crédits, RGPD, annuaire) | Testée sur PostgreSQL 16 |
-| Moteur de sécurité (5 niveaux, écran d'urgence, numéros) | Testé (20 situations) |
-| Liens vérifiés (aucune adresse inventée) | Testé |
-| Crédits et usage raisonnable Premium | Testés, y compris 40 débits simultanés |
-| Fiche de réparation générée par l'IA (validation, étapes à cocher, économies estimées) | Testée |
-| Composants de l'interface (accueil, conversation, fiche, artisans, barre d'onglets) | Rendu testé avec React |
-| Site Next.js complet | Écrit et vérifié en syntaxe ; **pas encore compilé** (npm indisponible ici) : GitHub le compilera et lancera le test de bout en bout au premier envoi |
+| Base de données, crédits, RGPD, annuaire, abonnements | Tests SQL |
+| Moteur de sécurité (5 niveaux, écran d'urgence, numéros) | 20 situations + parcours urgence gaz sans débit |
+| Liens vérifiés (aucune adresse inventée) | Tests unitaires |
+| Fiche de réparation (étapes à cocher, économies estimées) | Bout en bout |
+| Guides d'entretien (17 guides, schémas, saisons) | Pages et contenu testés |
+| Espace artisan (inscription, SIRET contrôlé, validation, demandes reçues) | Bout en bout |
+| Administration (indicateurs, coûts, validation des artisans, crédits, réglages, journal) | Bout en bout |
+| Premium et packs de crédits (Stripe Checkout, webhook signé, portail client) | Signature, rejeu, crédit unique : bout en bout |
+| Voix et caméra (dictée, lecture, mains libres, caméra arrière avec lampe) | Fonctions testées ; micro et caméra à essayer sur téléphone |
 
-**Nouveau dans cette version**
+Ce qui ne peut être vérifié qu'après la mise en ligne, avec vos clés : les réponses de l'IA, l'envoi réel des
+e-mails, un vrai paiement Stripe (mode test d'abord), la recherche Google.
 
-- Design « Toit-Toit » : bandeau mandarine, mascotte animée, tuiles colorées, exemples de problèmes à toucher,
-  six domaines en icônes, barre d'onglets en bas comme une application, polices très lisibles.
-- Fiche de réparation interactive : l'IA remplit une fiche structurée (diagnostic, outils, durée, coût des pièces,
-  sécurité, étapes). On coche les étapes, la progression est enregistrée ; une fois tout coché, Toit-Toit demande
-  si ça marche, et la réussite est fêtée avec des confettis.
-- Mon espace : jauge de crédits, problèmes résolus, économies estimées (prix d'artisan évité).
-- Annuaire : filtres par métier, badges, et **demande d'intervention** envoyée par e-mail à l'artisan, avec le
-  résumé du dépannage seulement si l'utilisateur coche la case (5 demandes par jour au maximum).
-- Écran d'urgence redessiné : alerte animée, consignes numérotées, numéros en grand.
-- **Recherche Google des artisans dans le site** (version 0.3) : sous l'annuaire, un bouton cherche le métier autour
-  du code postal via Google Places ; nom, adresse, note et avis, ouvert ou fermé, appel et site web s'affichent dans
-  SOS Maison. Connexion requise, 10 recherches par jour et par compte, rien n'est stocké (règle Google).
+**Nouveau dans la version 0.4**
 
-**Pas encore fait** : espace artisan (création et gestion de fiche), abonnement Stripe, conversation vocale et
-vidéo en direct, tableau de bord administrateur. « Parler » utilise la dictée du téléphone ; « Montrer en vidéo » prend une photo.
+- **Guides d'entretien** dans le site complet : 17 guides illustrés, étapes à cocher, sélection de la saison sur l'accueil.
+- **Espace artisan** (`/pro`) : fiche gratuite, SIRET vérifié par sa clé de contrôle, visible seulement après
+  validation ; demandes reçues avec le diagnostic de Toit-Toit (si le client l'accepte), boutons Accepter / Refuser / Terminé.
+- **Administration** (`/admin`, comptes listés dans `ADMIN_EMAILS`) : comptes, actifs, Premium, dépannages, urgences,
+  recettes estimées et coûts des services du mois, artisans à vérifier avec lien vers l'annuaire officiel des
+  entreprises, crédits offerts, réglages (prix, crédits, plafonds), journal.
+- **Premium à 2,99 €/mois ou 29,90 €/an** et **pack de 100 crédits à 1,99 €** via Stripe ; résiliation et factures dans
+  le portail Stripe ; abonnement résilié automatiquement si le compte est supprimé.
+- **Voix** : bouton « Écouter » sur chaque réponse, **mode mains libres** (on parle, Toit-Toit répond à voix haute,
+  puis écoute de nouveau). **Caméra en direct** : on filme, on envoie l'image au bon moment, lampe si le téléphone en a une.
+  La voix utilise la reconnaissance et la synthèse vocales du navigateur : gratuites, mais pas une conversation
+  temps réel avec l'IA.
+- Sans clé d'IA, le site refuse poliment les messages et photos **avant** tout débit de crédits ; sans clé Brave,
+  l'outil de recherche n'est pas proposé.
 
 ## Version installable publique (GitHub Pages)
 
@@ -42,23 +54,11 @@ connexion : guides illustrés, entretien de saison, écran d'urgence, recherche 
 modification du dossier `appli/`. Sans serveur, l'assistant IA n'y répond pas : il oriente vers les guides et le bon artisan.
 L'assistant complet arrive avec la mise en ligne du site Next.js ci-dessous.
 
-## Mettre le site en ligne gratuitement
+## Mettre le site en ligne
 
-Seule la clé d'IA est payante (à l'usage, quelques euros suffisent pour tester).
-
-1. **GitHub** (gratuit) — créez un compte sur github.com, puis un dépôt privé `sos-maison` et envoyez-y ce dossier.
-   L'onglet *Actions* compile et teste automatiquement le site à chaque modification.
-2. **Supabase** (offre gratuite) — créez un projet en région *Europe*. Dans *Project Settings → Database*,
-   copiez la *Connection string* (mode *Transaction*) : c'est `DATABASE_URL`.
-3. **Anthropic** — sur platform.claude.com, ajoutez un moyen de paiement et créez une clé : `ANTHROPIC_API_KEY`.
-4. **Brave Search** — sur api-dashboard.search.brave.com, créez une clé (5 $ de crédit offerts chaque mois) : `BRAVE_API_KEY`.
-5. **Google Maps Platform** (1 000 recherches gratuites par mois, puis 35 $ les 1 000) — dans Google Cloud, activez
-   *Places API (New)*, créez une clé limitée à cette API : `GOOGLE_MAPS_API_KEY`.
-6. **Resend** (offre gratuite) — créez une clé pour envoyer les e-mails de connexion : `RESEND_API_KEY`.
-7. **Vercel** — importez le dépôt GitHub, collez les variables de `.env.example`, ajoutez `CRON_SECRET`
-   (une longue suite de caractères au hasard), puis déployez.
-8. **Créer les tables** — une seule fois, depuis un ordinateur : `DATABASE_URL=... npm run db:migrate`
-   (ou collez `db/migrations/0001_init.sql` dans l'éditeur SQL de Supabase).
+Le guide complet est dans [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md) : Supabase, Anthropic, Resend, Vercel,
+puis en option Brave, Google Maps et Stripe. Les tables sont créées automatiquement à chaque déploiement Vercel
+(`npm run vercel-build` applique les migrations manquantes, puis compile).
 
 L'offre gratuite de Vercel est réservée à un usage non commercial : passez à l'offre Pro au lancement.
 
@@ -98,3 +98,7 @@ tests/              tests unitaires et de bout en bout
 - Connexion par lien unique valable 15 minutes (5 demandes par heure et par adresse au maximum).
 - Photos vérifiées par leur contenu (JPEG, PNG, WebP, 1 Mo au plus), privées, effacées après 90 jours.
 - Les pages légales sont des **modèles à compléter et à faire relire** (champs entre crochets).
+- Paiements : aucune donnée de carte ne transite par SOS Maison ; chaque notification Stripe est vérifiée par sa
+  signature et n'est traitée qu'une fois (pas de double crédit en cas de rejeu).
+- Espace artisan et administration : chaque action est contrôlée côté serveur (propriétaire de la fiche, rôle
+  administrateur) et inscrite au journal.

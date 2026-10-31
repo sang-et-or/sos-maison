@@ -4,7 +4,8 @@ import Link from "next/link";
 import { RichText, SourceList, type Source } from "./RichText";
 import { RepairCard, confetti } from "./RepairCard";
 import { MascotFace } from "./Mascot";
-import { compressImage, dictationSupported, startDictation } from "./media";
+import { compressImage, dictationSupported, speak, speechSupported, startDictation } from "./media";
+import { LiveCamera } from "./LiveCamera";
 import { DRAFT_KEY, DRAFT_PHOTO_KEY } from "./Starter";
 import type { RepairCard as Card } from "@/lib/ai/card";
 
@@ -35,6 +36,13 @@ const PRO_NAMES: Record<string, string> = {
   electromenager: "un réparateur",
   multiservices: "un artisan",
 };
+
+/** Texte lu à voix haute : la réponse, puis l'essentiel de la fiche si elle existe. */
+function spokenAnswer(text: string, card?: Card | null): string {
+  if (!card) return text;
+  const steps = card.etapes.map((e, i) => `Étape ${i + 1} : ${e}`).join(". ");
+  return `${text}. Voici la fiche : ${card.titre}. ${card.securite ? `Sécurité : ${card.securite}. ` : ""}${steps}`;
+}
 
 let seq = 0;
 const key = () => `m${Date.now()}-${seq++}`;
@@ -70,6 +78,14 @@ export function Chat(props: {
     return Boolean(lastCard?.card && lastCard.cardDone.length >= lastCard.card.etapes.length);
   });
   const stopDictation = useRef<(() => void) | null>(null);
+  const stopSpeaking = useRef<(() => void) | null>(null);
+  const [speakingKey, setSpeakingKey] = useState<string | null>(null);
+  const [canSpeak, setCanSpeak] = useState(false);
+  const [handsFree, setHandsFree] = useState(false);
+  const handsFreeRef = useRef(false);
+  const [camera, setCamera] = useState(false);
+  useEffect(() => setCanSpeak(speechSupported()), []);
+  useEffect(() => () => { stopSpeaking.current?.(); stopDictation.current?.(); }, []);
   const bottom = useRef<HTMLDivElement>(null);
   const photoInput = useRef<HTMLInputElement>(null);
   const started = useRef(false);
@@ -170,7 +186,10 @@ export function Chat(props: {
             case "sources": patchBot((b) => ({ ...b, sources: ev.sources })); break;
             case "card": setCardComplete(false); patchBot((b) => ({ ...b, card: ev.card })); break;
             case "notice": setWarning(ev.text); break;
-            case "final": patchBot((b) => ({ ...b, content: ev.text, sources: ev.sources, card: ev.card ?? b.card, streaming: false, status: undefined })); break;
+            case "final":
+              patchBot((b) => ({ ...b, content: ev.text, sources: ev.sources, card: ev.card ?? b.card, streaming: false, status: undefined }));
+              if (handsFreeRef.current) readAloud.current(botKey, spokenAnswer(ev.text, ev.card), true);
+              break;
             case "saved": patchBot((b) => ({ ...b, id: ev.messageId })); break;
             case "error": setError({ message: ev.message }); break;
           }
@@ -184,6 +203,9 @@ export function Chat(props: {
       setBusy(false);
     }
   }, []);
+
+  const sendRef = useRef(send);
+  sendRef.current = send;
 
   // Brouillon venant de l'accueil (texte et/ou photo).
   useEffect(() => {
@@ -213,6 +235,62 @@ export function Chat(props: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: s }),
     });
+  }
+
+  // --- Voix : lecture des réponses et mode mains libres (parler, écouter, reparler) ---
+  const listenHandsFree = useRef<() => void>(() => {});
+  const readAloud = useRef<(k: string, t: string, thenListen?: boolean) => void>(() => {});
+  readAloud.current = (k, t, thenListen = false) => {
+    stopSpeaking.current?.();
+    setSpeakingKey(k);
+    stopSpeaking.current = speak(t, () => {
+      setSpeakingKey(null);
+      if (thenListen && handsFreeRef.current) listenHandsFree.current();
+    });
+  };
+  listenHandsFree.current = () => {
+    if (!handsFreeRef.current) return;
+    let heard = "";
+    setListening(true);
+    stopDictation.current = startDictation({
+      continuous: false,
+      onText: (t) => { heard = t; setText(t); },
+      onEnd: () => {
+        setListening(false);
+        if (!handsFreeRef.current) return;
+        if (heard.trim()) sendRef.current(heard, []);
+        else stopHandsFree(); // silence : on arrête plutôt que d'écouter sans fin
+      },
+      onError: (m) => { setError({ message: m }); stopHandsFree(); },
+    });
+  };
+  function stopHandsFree() {
+    handsFreeRef.current = false;
+    setHandsFree(false);
+    setListening(false);
+    stopDictation.current?.();
+  }
+  function toggleHandsFree() {
+    if (handsFreeRef.current) {
+      stopSpeaking.current?.();
+      setSpeakingKey(null);
+      return stopHandsFree();
+    }
+    if (!dictationSupported() || !speechSupported()) {
+      setError({ message: "Le mode mains libres a besoin de Chrome, Edge ou Safari récents. Vous pouvez dicter avec le micro du clavier." });
+      return;
+    }
+    handsFreeRef.current = true;
+    setHandsFree(true);
+    setError(null);
+    readAloud.current("hands-free", "Je vous écoute. Décrivez le problème, je vous réponds à voix haute.", true);
+  }
+  function toggleRead(m: ChatMessage) {
+    if (speakingKey === m.key) {
+      stopSpeaking.current?.();
+      return setSpeakingKey(null);
+    }
+    readAloud.current(m.key, spokenAnswer(m.content, m.card));
   }
 
   function toggleDictation() {
@@ -291,6 +369,12 @@ export function Chat(props: {
                         )}
                         {m.content && <RichText text={m.content} sources={m.sources} />}
                         {!m.streaming && !m.card && <SourceList sources={m.sources} />}
+                        {canSpeak && !m.streaming && m.content && (
+                          <button type="button" onClick={() => toggleRead(m)} aria-pressed={speakingKey === m.key}
+                                  className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 text-[0.85rem] font-bold text-muted">
+                            {speakingKey === m.key ? "■ Arrêter" : "🔊 Écouter"}
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}
@@ -351,6 +435,16 @@ export function Chat(props: {
         }}
         className="sticky bottom-0 border-t border-line bg-white px-3 pb-[max(0.9rem,env(safe-area-inset-bottom))] pt-2.5"
       >
+        <div className="mb-2 flex gap-2 overflow-x-auto [scrollbar-width:none]">
+          <button type="button" onClick={() => setCamera(true)} disabled={busy || uploading || pending.length >= 4}
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1.5 text-[0.88rem] font-bold text-sky-700 disabled:opacity-50">
+            📹 Caméra en direct
+          </button>
+          <button type="button" onClick={toggleHandsFree} aria-pressed={handsFree}
+                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.88rem] font-bold ${handsFree ? "bg-mint text-white" : "bg-mint-50 text-mint-700"}`}>
+            🎧 {handsFree ? (listening ? "Je vous écoute…" : speakingKey ? "Toit-Toit parle…" : "Mains libres activé") : "Mains libres"}
+          </button>
+        </div>
         {pending.length > 0 && (
           <div className="mb-2 flex gap-2">
             {pending.map((p) => (
@@ -392,6 +486,9 @@ export function Chat(props: {
             <svg aria-hidden viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </button>
         </div>
+        {camera && (
+          <LiveCamera remaining={4 - pending.length} onClose={() => setCamera(false)} onCapture={(b) => uploadPhoto(b)} />
+        )}
         <input ref={photoInput} type="file" accept="image/*" capture="environment" className="hidden"
                onChange={async (e) => {
                  const f = e.target.files?.[0];

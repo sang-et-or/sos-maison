@@ -42,6 +42,10 @@ export async function POST(req: Request) {
   // 1. Règles de sécurité déterministes : avant tout débit et tout appel à l'IA.
   const rules = classifyText(body.text);
   const emergencyByRules = rules.level === 4;
+  // Sans clé d'IA, on refuse avant tout débit (l'urgence, elle, fonctionne toujours).
+  if (!emergencyByRules && !process.env.ANTHROPIC_API_KEY) {
+    return errorResponse(new HttpError(503, "L'assistant n'est pas encore activé sur ce site. Consultez les guides ou l'annuaire en attendant.", "ai_disabled"));
+  }
 
   // 2. Dépannage existant ou nouveau, et débit du message (sauf urgence : jamais facturée).
   let repair;

@@ -10,11 +10,13 @@ export default function Page() {
       <h2 className="font-bold">2. Sécurité</h2>
       <p>Le service refuse de guider les interventions dangereuses (gaz, chaudière, tableau électrique, structure, amiante…) et oriente vers un professionnel ou les secours. Ne réalisez jamais une opération dont vous n&apos;êtes pas sûr.</p>
       <h2 className="font-bold">3. Compte et crédits</h2>
-      <p>Chaque nouveau compte reçoit des crédits gratuits, une seule fois par adresse e-mail. Les crédits n&apos;ont pas de valeur monétaire et ne sont ni remboursables ni cessibles.</p>
+      <p>Chaque nouveau compte reçoit des crédits gratuits, une seule fois par adresse e-mail. Des packs de crédits peuvent être achetés ; les crédits achetés n&apos;expirent pas. Les crédits ne sont pas cessibles et ne peuvent pas être convertis en argent. Les situations d&apos;urgence détectées ne consomment jamais de crédit.</p>
       <h2 className="font-bold">4. Abonnement Premium</h2>
-      <p>L&apos;abonnement donne accès au service sans décompte de crédits, dans la limite d&apos;un usage raisonnable : [plafonds mensuels]. Il est sans engagement et résiliable à tout moment depuis votre compte. Droit de rétractation de 14 jours : [modalités].</p>
+      <p>L&apos;abonnement (2,99&nbsp;€ TTC par mois ou 29,90&nbsp;€ TTC par an) donne accès au service sans décompte de crédits, dans la limite d&apos;un usage raisonnable par mois : 20 nouveaux dépannages, 60 photos, 30 recherches de tutoriels, 20 minutes de voix et 10 minutes de vidéo. Le paiement est traité par Stripe ; SOS Maison ne voit ni ne conserve vos numéros de carte. L&apos;abonnement est sans engagement et se renouvelle automatiquement ; il se résilie à tout moment depuis « Mon espace », avec effet à la fin de la période payée.</p>
+      <p>Droit de rétractation : vous disposez de 14 jours après la souscription ou l&apos;achat. En utilisant le service pendant ce délai, vous demandez qu&apos;il commence immédiatement ; en cas de rétractation, seul le montant correspondant à l&apos;usage déjà fait reste dû. [Modalités et formulaire de rétractation à valider avec un juriste.]</p>
       <h2 className="font-bold">5. Annuaire d&apos;artisans</h2>
       <p>SOS Maison met en relation des particuliers et des professionnels indépendants. SOS Maison n&apos;est pas partie au contrat conclu avec l&apos;artisan et n&apos;est pas responsable de son intervention.</p>
+      <p>Les artisans s&apos;inscrivent gratuitement et sans commission. Chaque fiche est vérifiée (numéro SIRET) avant d&apos;apparaître dans l&apos;annuaire ; elle peut être suspendue en cas d&apos;informations inexactes ou de réclamations répétées. Les résultats issus de Google Maps sont fournis à titre indicatif et ne sont pas vérifiés par SOS Maison.</p>
       <h2 className="font-bold">6. Responsabilité</h2>
       <p>[Clause de limitation de responsabilité à rédiger avec un juriste.]</p>
       <h2 className="font-bold">7. Droit applicable</h2>

@@ -5,12 +5,25 @@
 import assert from "node:assert/strict";
 import { createHash, randomBytes } from "node:crypto";
 import postgres from "postgres";
+import { signStripePayload } from "../src/lib/billing/stripe";
 
 const BASE = process.env.APP_URL ?? "http://localhost:3000";
 const sql = postgres(process.env.DATABASE_URL!, { max: 1, prepare: false, ssl: false, onnotice: () => {} });
 
 async function get(path: string, init?: RequestInit) {
   return fetch(BASE + path, { redirect: "manual", ...init });
+}
+const json = (cookie: string, method: string, body: unknown): RequestInit => ({
+  method, headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify(body),
+});
+
+/** Ouvre une session pour un e-mail (jeton de connexion créé directement en base). */
+async function login(email: string): Promise<string> {
+  const token = randomBytes(32).toString("base64url");
+  await sql`insert into login_tokens (token_hash, email, expires_at)
+            values (${createHash("sha256").update(token).digest("hex")}, ${email}, now() + interval '10 minutes')`;
+  const r = await get(`/api/auth/verify?token=${token}&next=/`);
+  return (r.headers.get("set-cookie") ?? "").split(";")[0];
 }
 
 async function main() {
@@ -20,10 +33,14 @@ async function main() {
   const home = await r.text();
   assert.match(home, /Quel est votre problème/);
   assert.match(home.replace(/\u00a0|&nbsp;/g, " "), /0 800 47 33 33/);
-  for (const p of ["/connexion", "/cgu", "/confidentialite", "/mentions-legales", "/manifest.webmanifest", "/sw.js", "/icons/icon-192.png"]) {
+  for (const p of ["/guides", "/guides/radiateur", "/connexion", "/cgu", "/confidentialite", "/mentions-legales", "/manifest.webmanifest", "/sw.js", "/icons/icon-192.png"]) {
     r = await get(p);
     assert.equal(r.status, 200, p);
   }
+  r = await get("/guides/radiateur");
+  assert.match(await r.text(), /Purger un radiateur/);
+  r = await get("/guides/inconnu");
+  assert.equal(r.status, 404);
   r = await get("/artisans?cp=69006&metier=plombier");
   assert.match(await r.text(), /Démo Plomberie Rhône/);
   r = await get("/artisans?cp=13001&metier=plombier");
@@ -107,6 +124,83 @@ async function main() {
   const [sr] = await sql`select shared_summary, consent_share from service_requests where pro_id = ${pro.id} order by created_at desc limit 1`;
   assert.ok(sr.consent_share && /Flotteur trop haut/.test(sr.shared_summary));
   console.log("✓ demande d'intervention");
+
+  // Espace artisan : inscription, fiche invisible jusqu'à validation
+  const proBody = { companyName: "Smoke Plomberie", siret: "73282932000074", categories: ["plombier"], city: "Lyon", postalCode: "69003",
+    departments: "69", phone: "04 72 00 00 00", email: "smoke-pro@example.fr", website: "", description: "Test", certify: true };
+  r = await get("/api/pro", json(cookie, "POST", { ...proBody, siret: "73282932000075" }));
+  assert.equal(r.status, 400, "SIRET invalide refusé");
+  r = await get("/api/pro", json(cookie, "POST", proBody));
+  assert.equal(r.status, 200, await r.clone().text());
+  const newPro = (await r.json()).id as string;
+  r = await get("/api/pro", json(cookie, "POST", proBody));
+  assert.equal(r.status, 409, "une seule fiche par compte");
+  r = await get("/pro", { headers: { cookie } });
+  assert.match(await r.text(), /En cours de vérification/);
+  r = await get("/artisans?cp=69003&metier=plombier");
+  assert.doesNotMatch(await r.text(), /Smoke Plomberie/, "invisible avant validation");
+  r = await get(`/api/admin/pros/${newPro}`, json(cookie, "PATCH", { status: "verified" }));
+  assert.equal(r.status, 403, "validation réservée à l'administration");
+  console.log("✓ inscription artisan");
+
+  // Administration
+  const admin = await login("admin-smoke@example.fr");
+  r = await get("/admin", { headers: { cookie: admin } });
+  const adminPage = await r.text();
+  assert.match(adminPage, /Artisans à vérifier/);
+  assert.match(adminPage, /Smoke Plomberie/);
+  r = await get(`/api/admin/pros/${newPro}`, json(admin, "PATCH", { status: "verified", note: "SIRET vérifié" }));
+  assert.equal(r.status, 200);
+  r = await get("/artisans?cp=69003&metier=plombier");
+  assert.match(await r.text(), /Smoke Plomberie/, "visible après validation");
+  r = await get("/api/admin/credits", json(admin, "POST", { email, amount: 50, reason: "test smoke" }));
+  assert.equal((await r.json()).balance, 150);
+  r = await get("/api/admin/settings", json(admin, "PATCH", { key: "welcome_credits", value: -5 }));
+  assert.equal(r.status, 400, "réglage invalide refusé");
+  r = await get("/api/admin/settings", json(admin, "PATCH", { key: "google_search_daily_limit", value: 12 }));
+  assert.equal(r.status, 200);
+  console.log("✓ administration");
+
+  // Demande reçue puis traitée par l'artisan
+  r = await get("/api/requests", json(cookie, "POST", { proId: newPro, name: "Client Test", phone: "06 11 11 11 11", postalCode: "69003", message: "Robinet qui fuit, merci de me rappeler." }));
+  assert.equal(r.status, 200, await r.clone().text());
+  const [req] = await sql`select id from service_requests where pro_id = ${newPro}`;
+  r = await get("/pro", { headers: { cookie } });
+  assert.match(await r.text(), /Client Test/);
+  r = await get(`/api/pro/requests/${req.id}`, json(cookie, "PATCH", { status: "accepted" }));
+  assert.equal(r.status, 200);
+  r = await get(`/api/pro/requests/${req.id}`, json(admin, "PATCH", { status: "done" }));
+  assert.equal(r.status, 404, "seul l'artisan concerné peut répondre");
+  console.log("✓ demandes côté artisan");
+
+  // Paiements Stripe (webhooks signés, sans appel à Stripe)
+  r = await get("/api/billing/checkout", { method: "POST", headers: { cookie, "Content-Type": "application/x-www-form-urlencoded" }, body: "offre=monthly" });
+  assert.equal(r.status, 303);
+  assert.match(r.headers.get("location") ?? "", /paiement=indisponible/, "sans clé Stripe, aucun paiement");
+  const [{ id: uid }] = await sql`select id from users where email = ${email}`;
+  const hook = async (event: unknown, signed = true) => {
+    const body = JSON.stringify(event);
+    return get("/api/billing/webhook", { method: "POST", body, headers: { "Content-Type": "application/json",
+      "stripe-signature": signed ? signStripePayload(body, process.env.STRIPE_WEBHOOK_SECRET!) : "t=1,v1=00" } });
+  };
+  const subEvent = { id: `evt_sub_${Date.now()}`, type: "customer.subscription.created", data: { object: {
+    id: "sub_smoke", customer: "cus_smoke", status: "active", cancel_at_period_end: false, metadata: { user_id: uid },
+    items: { data: [{ current_period_start: Math.floor(Date.now() / 1000), current_period_end: Math.floor(Date.now() / 1000) + 30 * 86400, price: { recurring: { interval: "month" } } }] } } } };
+  r = await hook(subEvent, false);
+  assert.equal(r.status, 400, "signature exigée");
+  r = await hook(subEvent);
+  assert.equal((await r.json()).result, "ok");
+  r = await hook(subEvent);
+  assert.equal((await r.json()).result, "déjà traité");
+  r = await get("/compte", { headers: { cookie } });
+  assert.match(await r.text(), /Premium mensuel/);
+  const packEvent = { id: `evt_pack_${Date.now()}`, type: "checkout.session.completed", data: { object: {
+    id: "cs_smoke", mode: "payment", payment_status: "paid", metadata: { kind: "pack", credits: "100", user_id: uid } } } };
+  await hook(packEvent);
+  await hook(packEvent);
+  const [{ credit_balance: afterPack }] = await sql`select credit_balance from users where id = ${uid}`;
+  assert.equal(afterPack, 250, "pack crédité une seule fois");
+  console.log("✓ abonnement et pack de crédits");
 
   // Export et suppression RGPD
   r = await get("/api/account/export", { headers: { cookie } });

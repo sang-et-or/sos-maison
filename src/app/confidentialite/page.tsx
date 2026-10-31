@@ -17,7 +17,7 @@ export default function Page() {
       <h2 className="font-bold">Durées de conservation</h2>
       <p>Photos : 90 jours, sauf si vous conservez le dépannage. Compte : jusqu&apos;à sa suppression. Factures : 10 ans.</p>
       <h2 className="font-bold">Sous-traitants</h2>
-      <p>Anthropic (analyse des messages et photos), Google (voix et vidéo en direct, à venir), Brave (recherche de tutoriels), Vercel (hébergement), Supabase (base de données, UE), Resend (e-mails), Stripe (paiement). Les transferts hors UE sont encadrés par les clauses contractuelles types de la Commission européenne.</p>
+      <p>Anthropic (analyse des messages et photos), Google (recherche d&apos;artisans sur Google Maps), la reconnaissance vocale de votre navigateur si vous utilisez la dictée (Google pour Chrome, Apple pour Safari), Brave (recherche de tutoriels), Vercel (hébergement), Supabase (base de données, UE), Resend (e-mails), Stripe (paiement). Les transferts hors UE sont encadrés par les clauses contractuelles types de la Commission européenne.</p>
       <h2 className="font-bold">Caméra et micro</h2>
       <p>Ils ne sont utilisés que lorsque vous appuyez sur le bouton correspondant. Seules les photos que vous choisissez d&apos;envoyer sont conservées.</p>
       <h2 className="font-bold">Vos droits</h2>

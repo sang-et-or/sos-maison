@@ -101,7 +101,7 @@ export default async function ProsPage({
       )}
 
       <p className="text-center text-muted">
-        Vous êtes artisan&nbsp;? <b className="text-ink">L&apos;inscription est gratuite.</b>
+        Vous êtes artisan&nbsp;? <Link href="/pro" className="font-bold text-ink underline">Inscrivez-vous gratuitement</Link>
       </p>
     </div>
   );
