@@ -104,11 +104,12 @@ export async function* runAssistant(opts: {
   for (let round = 0; round < MAX_SEARCHES + 2; round++) {
     const tools: Anthropic.Tool[] = [];
     if (canSearch && searches < MAX_SEARCHES) tools.push(SEARCH_TOOL);
-    if (canCard && !card) tools.push(CARD_TOOL as Anthropic.Tool);
+    const offerCard: boolean = canCard && card === null;
+    if (offerCard) tools.push(CARD_TOOL as Anthropic.Tool);
     const stream = anthropic().messages.stream({
       model: MODELS.chat,
       max_tokens: 1600,
-      system: systemFor(opts.risk, { premium: opts.premium, equipment: opts.equipment, cardTool: canCard && !card }),
+      system: systemFor(opts.risk, { premium: opts.premium, equipment: opts.equipment, cardTool: offerCard }),
       tools: tools.length ? tools : undefined,
       messages,
     });
