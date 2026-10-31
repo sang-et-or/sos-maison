@@ -34,6 +34,14 @@ annuaire d'artisans avec demande d'intervention, application installable.
 **Pas encore fait** : espace artisan (création et gestion de fiche), abonnement Stripe, conversation vocale et
 vidéo en direct, tableau de bord administrateur. « Parler » utilise la dictée du téléphone ; « Montrer en vidéo » prend une photo.
 
+## Version installable publique (GitHub Pages)
+
+Le dossier `pages/` contient une version autonome de SOS Maison, installable sur téléphone et utilisable hors
+connexion : guides illustrés, entretien de saison, écran d'urgence, recherche d'artisans, équipements et historique
+(enregistrés sur le téléphone). Elle est publiée automatiquement par `.github/workflows/pages.yml` à chaque
+modification du dossier. Sans serveur, l'assistant IA n'y répond pas : il oriente vers les guides et le bon artisan.
+L'assistant complet arrive avec la mise en ligne du site Next.js ci-dessous.
+
 ## Mettre le site en ligne gratuitement
 
 Seule la clé d'IA est payante (à l'usage, quelques euros suffisent pour tester).
