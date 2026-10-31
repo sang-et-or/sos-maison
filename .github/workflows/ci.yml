@@ -7,6 +7,8 @@ on:
 jobs:
   verifier:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     services:
       postgres:
         image: postgres:16
@@ -57,3 +59,15 @@ jobs:
             echo "::error title=Test de bout en bout::$msg"
             exit 1
           fi
+      - name: Captures d'écran (branche « captures »)
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2
+          npx playwright install --with-deps chromium
+          curl -sf http://localhost:3000/ > /dev/null || { npx next start -p 3000 & sleep 8; }
+          npx tsx tests/captures.ts
+          cd captures
+          git init -q && git checkout -q -b captures
+          git add . && git -c user.name=ci -c user.email=ci@example.invalid commit -qm "Captures ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" captures
