@@ -33,7 +33,12 @@ jobs:
       - name: Installer les dépendances
         run: npm install --no-audit --no-fund
       - name: Vérifier les types
-        run: npm run typecheck
+        run: |
+          if ! npx tsc --noEmit --pretty false > tsc.log 2>&1; then
+            msg=$(head -40 tsc.log | sed -e 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+            echo "::error title=Types::$msg"
+            exit 1
+          fi
       - name: Tests unitaires (sécurité, liens, crédits)
         run: npm test
       - name: Créer la base
