@@ -252,6 +252,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .src-list a { color: var(--sky-700); font-weight: 700; overflow-wrap: anywhere; }
 .warn-panel { background: var(--red-50); }
 .g-steps-wrap { background: #fff; border: 2px solid var(--ink); border-radius: 26px; padding: 16px; display: grid; gap: 12px; box-shadow: 0 5px 0 var(--ink); }
+.say { justify-self: start; border: 0; border-radius: 999px; background: var(--paper); color: var(--muted); font: 700 .85rem var(--body); padding: 6px 12px; cursor: pointer; }
+.repair-h .say { margin-left: auto; margin-right: 8px; }
 .g-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .g-step { background: var(--paper); border-radius: 20px; padding: 12px; display: grid; gap: 8px; transition: background .2s; }
 .g-step.is-done { background: var(--mint-50); }
@@ -1551,6 +1553,21 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     S.guide = g.id;
     go("guide");
   }
+  // Lecture à voix haute (synthèse vocale du téléphone, gratuite) : pratique les mains occupées.
+  var VOICE_OK = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  function speakFr(parts, onEnd) {
+    if (!VOICE_OK) return;
+    var synth = window.speechSynthesis; synth.cancel();
+    var voices = synth.getVoices(), v = voices.filter(function (x) { return /^fr/i.test(x.lang); })[0];
+    parts.forEach(function (t, i) {
+      var u = new SpeechSynthesisUtterance(t); u.lang = "fr-FR"; if (v) u.voice = v;
+      if (i === parts.length - 1) { u.onend = onEnd || null; u.onerror = onEnd || null; }
+      synth.speak(u);
+    });
+  }
+  function stopSpeech() { if (VOICE_OK) window.speechSynthesis.cancel(); }
+  window.addEventListener("hashchange", stopSpeech);
+
   function renderGuide() {
     var g = GUIDES.find(function (x) { return x.id === S.guide; }); if (!g) return go("guides");
     $("guide-title").textContent = g.t;
@@ -1590,13 +1607,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         el("label", { class: "g-step-h", for: "gs-" + i }, [input, el("span", { class: "check", html: CHECK }), el("span", { class: "g-num", text: "Étape " + (i + 1) }), el("b", { text: st.t })]),
         el("p", { class: "g-text", text: st.x })
       ];
+      if (VOICE_OK) kids.push(el("button", { type: "button", class: "say", "aria-label": "Écouter l'étape " + (i + 1), text: "🔊 Écouter",
+        onclick: function () { speakFr(["Étape " + (i + 1) + ". " + st.t + ".", st.x].concat(st.astuce ? ["Astuce : " + st.astuce] : [])); } }));
       if (st.img && ILL[st.img] && st.img !== g.ill) kids.push(el("div", { class: "ill", html: ILL[st.img] }));
       if (st.astuce) kids.push(el("p", { class: "tip" }, [el("b", { text: "💡 Astuce : " }), document.createTextNode(st.astuce)]));
       var li = el("li", { class: "g-step" + (input.checked ? " is-done" : "") }, kids);
       steps.append(li);
     });
     body.append(el("section", { class: "g-steps-wrap", "aria-label": "Étapes" }, [
-      el("div", { class: "repair-h" }, [el("b", { text: "Pas à pas" }), prog]),
+      el("div", { class: "repair-h" }, [el("b", { text: "Pas à pas" }), VOICE_OK ? el("button", { type: "button", class: "say", text: "🔊 Tout lire", onclick: function () {
+        speakFr(["Sécurité : " + g.secu].concat(g.s.map(function (st, i) { return "Étape " + (i + 1) + ". " + st.t + ". " + st.x; })));
+      } }) : null, prog].filter(Boolean)),
       el("div", { class: "bar", role: "progressbar", "aria-label": "Avancement" }, [fill]), steps]));
 
     if (done.length === total) body.append(el("div", { class: "done" }, [el("b", { text: "Bien joué !" }), el("p", { text: "Guide terminé. Vous pouvez le refaire quand vous voulez." }),

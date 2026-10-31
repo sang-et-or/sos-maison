@@ -87,7 +87,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
 
       {premium ? (
         <section id="premium" className="grid gap-2 rounded-[1.8rem] bg-sun-50 p-5">
-          <b className="font-display text-[1.2rem] font-extrabold">Premium {sub?.plan === "yearly" ? "annuel" : "mensuel"}</b>
+          <b className="font-display text-[1.2rem] font-extrabold">{`Premium ${sub?.plan === "yearly" ? "annuel" : "mensuel"}`}</b>
           {sub?.current_period_end && (
             <p>{sub.cancel_at_period_end ? `Résilié : reste actif jusqu'au ${dateFr(sub.current_period_end)}.` : `Prochain renouvellement le ${dateFr(sub.current_period_end)}.`}</p>
           )}

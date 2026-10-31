@@ -1,5 +1,5 @@
 // SOS Maison : l'application fonctionne même sans connexion (guides, urgences, historique local).
-const CACHE = "sos-maison-pages-v1";
+const CACHE = "sos-maison-pages-v2";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-512-maskable.png"];
 
 self.addEventListener("install", (e) => {
