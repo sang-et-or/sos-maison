@@ -202,6 +202,37 @@ async function main() {
   assert.equal(afterPack, 250, "pack crédité une seule fois");
   console.log("✓ abonnement et pack de crédits");
 
+  // Comptes avec mot de passe
+  const pwEmail = `pw-${Date.now()}@example.fr`;
+  r = await get("/api/auth/signup", json("", "POST", { email: pwEmail, password: "12345678", acceptTerms: true }));
+  assert.equal(r.status, 400, "mot de passe trop faible refusé");
+  r = await get("/api/auth/signup", json("", "POST", { email: pwEmail, password: "Radiateur2026", acceptTerms: true }));
+  assert.equal(r.status, 200, await r.clone().text());
+  const pwCookie = (r.headers.get("set-cookie") ?? "").split(";")[0];
+  r = await get("/compte", { headers: { cookie: pwCookie } });
+  const pwPage = await r.text();
+  assert.match(pwPage, />100</, "100 crédits à l'inscription");
+  assert.match(pwPage, /protégé par un mot de passe/);
+  r = await get("/api/auth/signup", json("", "POST", { email: pwEmail, password: "Radiateur2026", acceptTerms: true }));
+  assert.equal(r.status, 409, "pas de deuxième compte");
+  r = await get("/api/auth/login", json("", "POST", { email: pwEmail.toUpperCase(), password: "Mauvais2026" }));
+  assert.equal(r.status, 401);
+  r = await get("/api/auth/login", json("", "POST", { email: ` ${pwEmail.toUpperCase()} `, password: "Radiateur2026" }));
+  assert.equal(r.status, 200, "connexion par mot de passe");
+  assert.match(r.headers.get("set-cookie") ?? "", /sm_session=/);
+  r = await get("/api/auth/login", json("", "POST", { email, password: "Nimporte2026" }));
+  assert.equal((await r.json()).code, "no_password", "compte créé par lien : invité à choisir un mot de passe");
+  r = await get("/api/auth/password", json(pwCookie, "POST", { current: "Faux2026xx", password: "Nouveau2026" }));
+  assert.equal(r.status, 403, "ancien mot de passe exigé");
+  r = await get("/api/auth/password", json(pwCookie, "POST", { current: "Radiateur2026", password: "Nouveau2026" }));
+  assert.equal(r.status, 200);
+  r = await get("/api/auth/login", json("", "POST", { email: pwEmail, password: "Nouveau2026" }));
+  assert.equal(r.status, 200, "nouveau mot de passe actif");
+  for (let i = 0; i < 8; i++) await get("/api/auth/login", json("", "POST", { email: pwEmail, password: `Faux${i}abcd` }));
+  r = await get("/api/auth/login", json("", "POST", { email: pwEmail, password: "Nouveau2026" }));
+  assert.equal(r.status, 429, "trop d'essais : blocage temporaire");
+  console.log("✓ comptes avec mot de passe");
+
   // Export et suppression RGPD
   r = await get("/api/account/export", { headers: { cookie } });
   assert.equal(r.status, 200);

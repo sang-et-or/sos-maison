@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@/lib/auth";
 import { sql, getSetting } from "@/lib/db";
 import { AccountActions } from "./AccountActions";
+import { PasswordForm } from "./PasswordForm";
 import { stripeConfigured } from "@/lib/billing/stripe";
 
 export const dynamic = "force-dynamic";
@@ -30,8 +31,8 @@ const PAYMENT_MSG: Record<string, { t: string; c: string }> = {
   erreur: { t: "Le paiement n'a pas pu démarrer. Réessayez dans un instant.", c: "bg-danger-50 text-danger-700" },
 };
 
-export default async function AccountPage({ searchParams }: { searchParams: Promise<{ paiement?: string }> }) {
-  const { paiement } = await searchParams;
+export default async function AccountPage({ searchParams }: { searchParams: Promise<{ paiement?: string; motdepasse?: string }> }) {
+  const { paiement, motdepasse } = await searchParams;
   const user = await currentUser();
   if (!user) redirect("/connexion?next=/compte");
 
@@ -48,6 +49,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
       where user_id = ${user.id} order by updated_at desc limit 1`,
     sql<{ status: string }[]>`select status from pros where user_id = ${user.id}`,
   ]);
+  const [{ has_password }] = await sql<{ has_password: boolean }[]>`select password_hash is not null as has_password from users where id = ${user.id}`;
   const payOpen = stripeConfigured();
   const money = (c: number) => (c / 100).toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00a0€";
   const msg = paiement ? PAYMENT_MSG[paiement] : undefined;
@@ -122,6 +124,8 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
           <button className="btn-soft min-h-[44px]">{money(pack.price_cents)}</button>
         </form>
       )}
+
+      <PasswordForm hasPassword={has_password} open={motdepasse === "1"} email={user.email} />
 
       <nav className="grid gap-2" aria-label="Autres espaces">
         <Link href="/installer" className="flex items-center justify-between rounded-3xl bg-white px-4 py-3 font-bold">

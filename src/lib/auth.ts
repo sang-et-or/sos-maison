@@ -53,16 +53,23 @@ export async function consumeLoginToken(token: string, userAgent: string | null)
     const [user] = await tx<{ id: string }[]>`select id from upsert_user(${rows[0].email})`;
     // La demande de lien exige l'acceptation des CGU : on l'horodate.
     await tx`update users set consent_terms_at = coalesce(consent_terms_at, now()) where id = ${user.id}`;
-    const admins =(process.env.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
-    if (admins.includes(rows[0].email)) {
-      await tx`update users set role = 'admin' where id = ${user.id}`;
-    }
-    const [session] = await tx<{ id: string }[]>`
-      insert into sessions (user_id, expires_at, user_agent)
-      values (${user.id}, now() + ${`${SESSION_DAYS} days`}::interval, ${userAgent?.slice(0, 300) ?? null})
-      returning id`;
-    return session.id;
+    return openSession(tx, user.id, rows[0].email, userAgent);
   });
+}
+
+/** Ouvre une session (et donne le rôle administrateur aux adresses de ADMIN_EMAILS). */
+export async function openSession(q: unknown, userId: string, email: string, userAgent: string | null): Promise<string> {
+  // q : la connexion partagée ou une transaction en cours (même interface d'appel).
+  const run = q as typeof sql;
+  const admins = (process.env.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+  if (admins.includes(email.toLowerCase())) {
+    await run`update users set role = 'admin' where id = ${userId}`;
+  }
+  const [session] = await run<{ id: string }[]>`
+    insert into sessions (user_id, expires_at, user_agent)
+    values (${userId}, now() + ${`${SESSION_DAYS} days`}::interval, ${userAgent?.slice(0, 300) ?? null})
+    returning id`;
+  return session.id;
 }
 
 export async function setSessionCookie(sessionId: string) {

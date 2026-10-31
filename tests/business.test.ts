@@ -132,3 +132,18 @@ test("Matériel : recherche Google sans les prix", () => {
   assert.equal(shoppingQuery("Tournevis plat"), "Tournevis plat");
   assert.match(shoppingUrl("Clé de purge (3 €)"), /^https:\/\/www\.google\.com\/search\?tbm=shop&hl=fr&gl=fr&q=Cl%C3%A9%20de%20purge$/);
 });
+
+import { hashPassword, verifyPassword, passwordProblem } from "../src/lib/password";
+test("Mots de passe : hachage et règles", async () => {
+  const h = await hashPassword("Radiateur2026");
+  assert.match(h, /^scrypt\$16384\$8\$1\$/);
+  assert.notEqual(h, await hashPassword("Radiateur2026"), "sel aléatoire");
+  assert.ok(await verifyPassword("Radiateur2026", h));
+  assert.ok(!(await verifyPassword("radiateur2026", h)));
+  assert.ok(!(await verifyPassword("x", null)));
+  assert.ok(!(await verifyPassword("x", "n'importe quoi")));
+  assert.equal(passwordProblem("court1"), "Le mot de passe doit contenir au moins 8 caractères.");
+  assert.ok(passwordProblem("12345678"));
+  assert.ok(passwordProblem("marie@ex.fr", "Marie@ex.fr"));
+  assert.equal(passwordProblem("Radiateur2026"), null);
+});
