@@ -27,7 +27,7 @@ export async function sendLoginEmail(to: string, link: string): Promise<void> {
       html,
     }),
   });
-  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
+  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status}) : ${(await res.text()).slice(0, 300)}`);
 }
 
 const esc = (t: string) =>
@@ -76,7 +76,7 @@ export async function sendServiceRequestEmail(to: string, r: {
       html,
     }),
   });
-  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
+  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status}) : ${(await res.text()).slice(0, 300)}`);
 }
 
 /** Informe l'artisan de la décision sur sa fiche. */
@@ -101,5 +101,5 @@ export async function sendProReviewEmail(to: string, r: { company: string; statu
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({ from: process.env.EMAIL_FROM ?? "SOS Maison <onboarding@resend.dev>", to, subject: `Votre fiche SOS Maison : ${r.status === "verified" ? "en ligne" : "mise à jour"}`, html }),
   });
-  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status})`);
+  if (!res.ok) throw new Error(`Envoi e-mail impossible (${res.status}) : ${(await res.text()).slice(0, 300)}`);
 }
