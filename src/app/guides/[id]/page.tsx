@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 function Ill({ name }: { name: string }) {
   const svg = ILLUSTRATIONS[name];
   if (!svg) return null;
-  return <div className="overflow-hidden rounded-2xl [&_svg]:h-auto [&_svg]:w-full" dangerouslySetInnerHTML={{ __html: svg }} />;
+  return <div className="overflow-hidden rounded-2xl [&_svg]:h-auto [&_svg]:w-full [&_text]:[font-family:var(--font-body)]" dangerouslySetInnerHTML={{ __html: svg }} />;
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ id: string }> }) {
@@ -56,7 +56,7 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
         </section>
       )}
 
-      <GuideSteps guideId={g.id} steps={g.s.map((s) => ({ ...s, svg: s.img ? ILLUSTRATIONS[s.img] : undefined }))} />
+      <GuideSteps guideId={g.id} steps={g.s.map((s) => ({ ...s, svg: s.img && s.img !== g.ill ? ILLUSTRATIONS[s.img] : undefined }))} />
 
       {g.erreurs.length > 0 && (
         <section className="rounded-3xl bg-white p-4">

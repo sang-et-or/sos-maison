@@ -41,7 +41,7 @@ export function GuideSteps({ guideId, steps }: { guideId: string; steps: Step[] 
                   <span className="mt-0.5 block text-[0.98rem]">{s.x}</span>
                 </span>
               </button>
-              {s.svg && <div className="mt-3 overflow-hidden rounded-2xl [&_svg]:h-auto [&_svg]:w-full" dangerouslySetInnerHTML={{ __html: s.svg }} />}
+              {s.svg && <div className="mt-3 overflow-hidden rounded-2xl [&_svg]:h-auto [&_svg]:w-full [&_text]:[font-family:var(--font-body)]" dangerouslySetInnerHTML={{ __html: s.svg }} />}
               {s.astuce && <p className="mt-2 rounded-2xl bg-sky-50 px-3 py-2 text-[0.95rem]"><b>Astuce&nbsp;: </b>{s.astuce}</p>}
             </li>
           );

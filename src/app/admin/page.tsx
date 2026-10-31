@@ -76,12 +76,12 @@ export default async function AdminPage() {
             {pending.map((p) => (
               <li key={p.id} className="space-y-2 rounded-3xl bg-white p-4">
                 <b className="font-display">{p.company_name}</b>
-                <p className="text-[0.95rem] text-muted">{p.cats.join(", ")} · {p.postal_code} {p.city} · inscrit le {new Intl.DateTimeFormat("fr-FR").format(p.created_at)}</p>
+                <p className="text-[0.95rem] text-muted">{[p.cats.join(", "), `${p.postal_code} ${p.city}`, `inscrit le ${new Intl.DateTimeFormat("fr-FR").format(p.created_at)}`].filter(Boolean).join(" · ")}</p>
                 <p className="text-[0.95rem]">
                   SIRET {p.siret ?? "—"}{" "}
                   {p.siret && <a className="text-sky-700 underline" href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${p.siret}`} target="_blank" rel="noopener noreferrer">vérifier sur l&apos;annuaire officiel</a>}
                 </p>
-                <p className="text-[0.95rem]">{p.phone} · {p.email} {p.website && <>· <a href={p.website} className="underline" target="_blank" rel="noopener noreferrer nofollow">site</a></>}</p>
+                <p className="text-[0.95rem]">{[p.phone, p.email].filter(Boolean).join(" · ") || "Aucun contact"} {p.website && <>· <a href={p.website} className="underline" target="_blank" rel="noopener noreferrer nofollow">site</a></>}</p>
                 {p.description && <p className="text-[0.95rem]">{p.description}</p>}
                 <ProReview id={p.id} />
               </li>
