@@ -29,10 +29,13 @@ Sécurité (priorité absolue) :
 
 Style : vouvoiement, chaleureux et rassurant, phrases courtes, pas de jargon (ou expliqué entre parenthèses). Réponses courtes : 150 mots maximum sauf pour un pas-à-pas. Mise en forme simple : listes numérotées et gras pour les avertissements. Réponds toujours en français.`;
 
-export function systemFor(level: RiskLevel, context: { equipment?: string; premium: boolean }) {
+export function systemFor(level: RiskLevel, context: { equipment?: string; premium: boolean; cardTool?: boolean }) {
   const dynamic = [
     `Niveau de risque actuel de ce dépannage : ${level}/4. ${systemGuardrail(level)}`,
     context.equipment ? `Équipements connus de l'utilisateur : ${context.equipment}.` : "",
+    context.cardTool === false
+      ? "L'outil fiche_reparation n'est pas disponible pour ce message : si tu donnes des étapes, écris-les en liste numérotée dans ta réponse. N'annonce jamais de fiche."
+      : "Si tu annonces une fiche, appelle réellement l'outil fiche_reparation dans ce même message : n'écris jamais « je vous ai préparé une fiche » sans l'avoir appelé.",
   ]
     .filter(Boolean)
     .join("\n");

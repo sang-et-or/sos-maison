@@ -51,3 +51,12 @@ test("formats durée et coût", () => {
   assert.equal(formatCost({ cout_max_eur: 8 }), "8 €");
   assert.equal(formatCost({}), null);
 });
+
+test("fiche : listes envoyées sous forme de texte acceptées", () => {
+  const base = { titre: "Purger le radiateur", diagnostic: "De l'air est coincé", securite: "Coupez le chauffage" };
+  const a = normalizeCard({ ...base, etapes: '["Coupez le chauffage", "Ouvrez la vis de purge"]', outils: "Clé de purge\nChiffon" });
+  assert.deepEqual(a?.etapes, ["Coupez le chauffage", "Ouvrez la vis de purge"]);
+  assert.deepEqual(a?.outils, ["Clé de purge", "Chiffon"]);
+  const b = normalizeCard({ ...base, etapes: "1. Coupez le chauffage\n2) Ouvrez la vis\n- Refermez" });
+  assert.deepEqual(b?.etapes, ["Coupez le chauffage", "Ouvrez la vis", "Refermez"]);
+});

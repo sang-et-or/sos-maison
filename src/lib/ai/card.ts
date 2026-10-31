@@ -54,8 +54,21 @@ const int = (v: unknown, min: number, max: number): number | undefined => {
 export function normalizeCard(input: unknown, allowedUrls: string[] = []): RepairCard | null {
   if (!input || typeof input !== "object") return null;
   const o = input as Record<string, unknown>;
+  // Le modèle envoie parfois une liste sous forme de texte (JSON ou une ligne par élément) : on l'accepte.
+  const asArray = (v: unknown): unknown[] => {
+    if (Array.isArray(v)) return v;
+    if (typeof v !== "string" || !v.trim()) return [];
+    const t = v.trim();
+    if (t.startsWith("[")) {
+      try {
+        const parsed = JSON.parse(t);
+        if (Array.isArray(parsed)) return parsed;
+      } catch { /* texte libre */ }
+    }
+    return t.split(/\n+/).map((l) => l.replace(/^\s*(\d+[.)]|[-•*])\s*/, "").trim());
+  };
   const list = (v: unknown, maxItems: number, maxLen: number) =>
-    Array.isArray(v) ? v.map((x) => clean(x, maxLen, allowedUrls)).filter(Boolean).slice(0, maxItems) : [];
+    asArray(v).map((x) => clean(x, maxLen, allowedUrls)).filter(Boolean).slice(0, maxItems);
 
   const card: RepairCard = {
     titre: clean(o.titre, 60, allowedUrls),

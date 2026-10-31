@@ -108,7 +108,7 @@ export async function* runAssistant(opts: {
     const stream = anthropic().messages.stream({
       model: MODELS.chat,
       max_tokens: 1600,
-      system: systemFor(opts.risk, { premium: opts.premium, equipment: opts.equipment }),
+      system: systemFor(opts.risk, { premium: opts.premium, equipment: opts.equipment, cardTool: canCard && !card }),
       tools: tools.length ? tools : undefined,
       messages,
     });
@@ -135,6 +135,7 @@ export async function* runAssistant(opts: {
     for (const tu of toolUses) {
       if (tu.name === CARD_TOOL.name) {
         const c = canCard ? normalizeCard(tu.input, sources.map((s) => s.url)) : null;
+        if (!c) console.warn("Fiche refusée", canCard ? JSON.stringify(tu.input).slice(0, 500) : "niveau de risque");
         if (c) {
           card = c;
           yield { type: "card", card: c };
@@ -144,7 +145,7 @@ export async function* runAssistant(opts: {
           tool_use_id: tu.id,
           content: c
             ? "Fiche affichée avec les étapes à cocher. Ajoute seulement une phrase d'encouragement courte, sans répéter les étapes."
-            : "Fiche refusée (incomplète ou non autorisée). Explique simplement par écrit.",
+            : "La fiche n'a pas pu s'afficher (incomplète ou non autorisée). Écris maintenant les étapes en liste numérotée dans ta réponse, et ne dis pas qu'une fiche est affichée.",
         });
         continue;
       }
