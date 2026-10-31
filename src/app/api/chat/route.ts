@@ -169,10 +169,12 @@ export async function POST(req: Request) {
         })) {
           send(ev);
           if (ev.type === "final") {
+            // ::text puis ::jsonb : le pilote envoie le texte tel quel, PostgreSQL le lit comme un objet JSON
+            // (un simple ::jsonb le ferait encoder deux fois et la fiche serait stockée comme une chaîne).
             const cardJson = ev.card ? JSON.stringify(ev.card) : null;
             const [a] = await sql<{ id: number }[]>`
               insert into messages (repair_id, role, content, risk_level, card)
-              values (${repair.id}, 'assistant', ${ev.text}, ${risk.level}, ${cardJson}::jsonb) returning id`;
+              values (${repair.id}, 'assistant', ${ev.text}, ${risk.level}, ${cardJson}::text::jsonb) returning id`;
             send({ type: "saved", messageId: a.id });
             for (const s of ev.sources) {
               await sql`insert into sources (repair_id, message_id, url, title, provider, is_video)

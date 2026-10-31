@@ -78,7 +78,7 @@ async function main() {
   const [rep2] = await sql`insert into repairs (user_id, title)
                            select id, 'Chasse d''eau' from users where email = ${email} returning id`;
   const [msg] = await sql`insert into messages (repair_id, role, content, card)
-                          values (${rep2.id}, 'assistant', 'Fiche', ${JSON.stringify({ titre: "Régler le flotteur", diagnostic: "Flotteur trop haut", securite: "Fermez le robinet", outils: ["Tournevis"], etapes: ["a", "b", "c"], economie_estimee_eur: 110 })}::jsonb)
+                          values (${rep2.id}, 'assistant', 'Fiche', ${JSON.stringify({ titre: "Régler le flotteur", diagnostic: "Flotteur trop haut", securite: "Fermez le robinet", outils: ["Tournevis"], etapes: ["a", "b", "c"], economie_estimee_eur: 110 })}::text::jsonb)
                           returning id`;
   r = await get(`/api/messages/${msg.id}/steps`, {
     method: "PATCH", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ step: 2, done: true }),
