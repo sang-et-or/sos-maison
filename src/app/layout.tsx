@@ -1,14 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import { Bricolage_Grotesque, Atkinson_Hyperlegible } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { currentUser } from "@/lib/auth";
 import { ServiceWorker } from "@/components/ServiceWorker";
 import { TabBar } from "@/components/TabBar";
 
 // Titres ronds et chaleureux ; texte très lisible (police conçue pour les personnes malvoyantes).
-const display = Bricolage_Grotesque({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-display", display: "swap" });
-const body = Atkinson_Hyperlegible({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-body", display: "swap" });
+// Polices hébergées avec le site (licence OFL, sous-ensemble latin) : aucune dépendance à Google Fonts à la compilation.
+const display = localFont({ src: "./fonts/BricolageGrotesque.woff", weight: "600 800", variable: "--font-display", display: "swap" });
+const body = localFont({
+  src: [
+    { path: "./fonts/AtkinsonHyperlegible-Regular.woff", weight: "400", style: "normal" },
+    { path: "./fonts/AtkinsonHyperlegible-Bold.woff", weight: "700", style: "normal" },
+  ],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "SOS Maison — un souci à la maison ? On répare ensemble",
